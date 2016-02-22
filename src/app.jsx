@@ -4,7 +4,7 @@ import ExampleComponent from './components/example/example.jsx';
 import HeaderComponent from './components/header/header.jsx';
 
 let styles = {
-	color: 'green',
+	color: 'white',
 	backgroundColor: 'red'
 };
 

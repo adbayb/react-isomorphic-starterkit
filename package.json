@@ -2,33 +2,32 @@
   "name": "reactjs-starterkit",
   "version": "1.0.0",
   "description": "A React.js boilerplate with Webpack and react-router",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "node clean.js public",
-    "dev": "webpack -d --watch --colors",
-    "build": "webpack -p --progress --colors",
-    "server": "http-server ./public",
-    "deploy:dev": "concurrent \"npm run dev\" \"npm run server\"",
-    "deploy:prod": "concurrent \"npm run build\" \"npm run server\"",
-    "start": "npm run deploy:dev"
+    "dev:build": "webpack -d --watch --colors --config webpack.config.dev.js",
+    "dev:deploy": "node webpack.server.js",
+    "prod:build": "webpack -p --progress --colors --config webpack.config.prod.js",
+    "prod:server": "http-server ./",
+    "prod:deploy": "concurrent \"npm run prod:build\" \"npm run prod:server\"",
+    "start": "npm run dev:deploy"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ayoubdev/reactjs-starterkit.git"
   },
   "bugs": {
-	"url": "https://github.com/ayoubdev/reactjs-starterkit/issues"
+    "url": "https://github.com/ayoubdev/reactjs-starterkit/issues"
   },
   "keywords": [
     "reactjs",
     "webpack",
     "react-router",
     "boilerplate",
-	"starter",
-	"kit",
-	"starterkit",
-	"starter-kit"
+    "starter",
+    "kit",
+    "starterkit",
+    "starter-kit"
   ],
   "author": "Ayoub ADIB <ayoub.development@gmail.com>",
   "license": "MIT",
@@ -43,10 +42,14 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "http-server": "^0.9.0",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
+    "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.13"
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   },
   "babel": {
     "presets": [
