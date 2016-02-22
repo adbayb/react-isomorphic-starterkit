@@ -1,0 +1,57 @@
+{
+  "name": "reactjs-starterkit",
+  "version": "1.0.0",
+  "description": "A React.js boilerplate with Webpack and react-router",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "node clean.js public",
+    "dev": "webpack -d --watch --colors",
+    "build": "webpack -p --progress --colors",
+    "server": "http-server ./public",
+    "deploy:dev": "concurrent \"npm run dev\" \"npm run server\"",
+    "deploy:prod": "concurrent \"npm run build\" \"npm run server\"",
+    "start": "npm run deploy:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayoubdev/reactjs-starterkit.git"
+  },
+  "bugs": {
+	"url": "https://github.com/ayoubdev/reactjs-starterkit/issues"
+  },
+  "keywords": [
+    "reactjs",
+    "webpack",
+    "react-router",
+    "boilerplate",
+	"starter",
+	"kit",
+	"starterkit",
+	"starter-kit"
+  ],
+  "author": "Ayoub ADIB <ayoub.development@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.3",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "concurrently": "^2.0.0",
+    "css-loader": "^0.23.1",
+    "del": "^2.2.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "http-server": "^0.9.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.13"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  }
+}
