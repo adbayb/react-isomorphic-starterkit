@@ -17,9 +17,9 @@ class App extends React.Component {
 			<div>
 				<h1 style={styles}> React template with Webpack, react-router and react-hot-loader </h1>
 				<ul>
-					<li><Link to="/example">Click to see Example component</Link></li>
-					<li><Link to="/header">Click To see Header component</Link></li>
-					<li><Link to="/welcome/Ayoub/23">Click To see Welcome component</Link></li>
+					<li><Link to="/example">Link to Example component</Link></li>
+					<li><Link to="/header">Link to Header component</Link></li>
+					<li><Link to="/welcome/Ayoub/23">Link to Welcome component</Link></li>
 				</ul>
 				{this.props.children}
 			</div>
