@@ -10,6 +10,5 @@ new WebpackDevServer(webpack(devConfig), {
 	if(err) {
 		console.log(err);
 	}
-
-	console.log('Listening at localhost:8080');
+	console.log('Webpack Server launched at localhost:8080 (hot reload enabled)');
 });

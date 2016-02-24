@@ -1,63 +1,84 @@
-import React from 'react';
-import {render} from 'react-dom';
-import { browserHistory, Router, Route, Link } from 'react-router';
-import ExampleComponent from './components/example/example.jsx';
-import HeaderComponent from './components/header/header.jsx';
-import WelcomeComponent from './components/welcome/welcome.jsx';
+import React from "react";
+import {browserHistory, Router, Route, Link, IndexRoute} from "react-router";
+import ExampleComponent from "./components/example/example.jsx";
+import HeaderComponent from "./components/header/header.jsx";
+import WelcomeComponent from "./components/welcome/welcome.jsx";
+import NavbarComponent from "./components/navbar/navbar.jsx";
+import SingleComponent from "./components/single/single.jsx";
+import NotFoundComponent from "./components/404/404.jsx";
 
 let styles = {
 	color: 'white',
-	backgroundColor: 'red'
+	backgroundColor: 'red',
+	minHeight: 100
 };
 
 class App extends React.Component {
 	render() {
-		console.log(this.props.children);
+		//console.log(this.props.children);
 		return (
 			<div>
-				<h1 style={styles}> React template with Webpack, react-router and react-hot-loader </h1>
-				<ul>
-					<li><Link to="/example">Link to Example component</Link></li>
-					<li><Link to="/header">Link to Header component</Link></li>
-					<li><Link to="/welcome/Ayoub/23">Link to Welcome component</Link></li>
-				</ul>
+				<div style={styles}>
+					<h1> React template with Webpack, react-router and react-hot-loader </h1>
+				</div>
+
+				{/*Rendu des composants des routes enfants*/}
 				{this.props.children}
+
+				<div>
+					<Link to="/">Go back</Link>
+				</div>
 			</div>
 		);
 	}
 }
 
-/*let routes = (
+export let routes = (
+	/*
 	<Router history={browserHistory}>
-		<Route path="/" component={App}/>
-	</Router>
-);*/
-render((
+	permet de gérer les url plus proprement (i.e sans les références du style ?_k=nt2q3u
+	mais le serveur doit supporter history location.
+	Or http-server ne le supporte pas, du coup react-router n'est pas appelé lors
+	du refresh d'une route en dehors de la racine.
+	Il faut configurer le serveur pour accepter history location (recoder un server avec express par exemple):
+	*/
 	<Router history={browserHistory}>
+		{/*Le path ne doit pas contenir / mais seulement le nom du chemin (sauf pour pour la racine "/")
+		 Auquel cas, le nom de la route sera checké au sens strict (ie "welcome/" ne sera valide que si
+		 on ajoute / à l'url, alors que "welcome" sera valide lorsque l'on tappera welcome ou welcome/*/}
 		<Route path="/" component={App}>
-			{/*Les composants spécifiés dans les routes enfants seront ajoutés dans
-			props.children du composant de la route parent (soit ici App.props.children)
-			C'est la raison pour laquelle dans le render de App, on a ajouté
-			{this.props.children} pour afficher les enfants*/}
-			<Route path="example" component={ExampleComponent} />
-			<Route path="header" component={HeaderComponent} />
-			<Route path="welcome/">
-				{/*inutile de spécifier le component dans <Route path=":age"/>
-				puisqu'on reste dans le contexte (composant) de la route parent*/}
-				<Route path=":name/" component={WelcomeComponent}>
-					<Route path=":age"/>
+			{/*IndexRoute permet de sélectionner la route enfant qui sera affiché par défaut quand on est sur "/":*/}
+			<IndexRoute component={NavbarComponent}/>
+
+			<Route path="/single" component={SingleComponent}>
+				{/*Les composants spécifiés dans les routes enfants seront ajoutés dans
+				 props.children du composant de la route parent (soit ici App.props.children)
+				 C'est la raison pour laquelle dans le render de App, on a ajouté
+				 {this.props.children} pour afficher les enfants*/}
+				<Route path="example" component={ExampleComponent}/>
+				<Route path="header" component={HeaderComponent}/>
+				<Route path="welcome" component={WelcomeComponent}>
+					{/*inutile de spécifier le component dans <Route path=":age"/>
+					 puisqu'on reste dans le contexte (composant) de la route parent*/}
+					<Route path=":name">
+						<Route path=":age"/>
+					</Route>
+					{/*//ou:
+					 <Route path=":name" component={WelcomeComponent} />
+					 <Route path=":name/:age" component={WelcomeComponent} />
+					 */}
 				</Route>
-				{/*//ou:
-				 <Route path=":name" component={WelcomeComponent} />
-				 <Route path=":name/:age" component={WelcomeComponent} />
-				*/}
 			</Route>
+			{/*No match route (route par défaut si non trouvé):*/}
+			<Route path="*" component={NotFoundComponent}/>
 		</Route>
 
 		{/*No match route (route par défaut si non trouvé):*/}
-		<Route path="*" component={ExampleComponent}/>
+		<Route path="*" component={NotFoundComponent}/>
 	</Router>
-), document.getElementById('app'));
+);
 
 //render par défaut sans react-router:
 //render(<App/>, document.getElementById('app'));
+
+export default App;

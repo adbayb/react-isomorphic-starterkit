@@ -6,7 +6,7 @@ var BUILD_DIR = path.resolve(__dirname, 'public');
 var APP_DIR = path.resolve(__dirname, 'src');
 var webpackProdConfig = {
 	entry: [
-		APP_DIR + '/app.jsx'
+		APP_DIR + '/index.jsx'
 	],
 	output: {
 		filename: 'all.bundle.js',

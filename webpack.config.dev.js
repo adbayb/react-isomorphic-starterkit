@@ -11,7 +11,7 @@ var webpackDevConfig = {
 	entry: [
 		'webpack-dev-server/client?http://localhost:8080',//WebpackDevServer host et port
 		'webpack/hot/only-dev-server',//"only" permet d'empêcher le rechargement lors d'erreurs de syntaxes
-		APP_DIR + '/app.jsx' //fichier d'entrée principale de notre code source
+		APP_DIR + '/index.jsx' //fichier d'entrée principale de notre code source
 	],
 	output: {
 		filename: 'all.bundle.js',
