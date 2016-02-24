@@ -33,7 +33,7 @@ class App extends React.Component {
 	}
 }
 
-export let routes = (
+App.routes = (
 	/*
 	<Router history={browserHistory}>
 	permet de gérer les url plus proprement (i.e sans les références du style ?_k=nt2q3u

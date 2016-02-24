@@ -1,6 +1,6 @@
-import {routes} from "./app.jsx";
+import App from "./app.jsx";
 import {render} from "react-dom";
 
 render((
-	routes
+	App.routes
 ), document.getElementById('app'));
