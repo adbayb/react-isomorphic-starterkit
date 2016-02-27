@@ -2,8 +2,8 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'public');
-var APP_DIR = path.resolve(__dirname, 'src');
+var BUILD_DIR = path.resolve(__dirname, '../public');
+var APP_DIR = path.resolve(__dirname, '../src');
 var webpackProdConfig = {
 	entry: [
 		APP_DIR + '/index.jsx'
@@ -11,7 +11,7 @@ var webpackProdConfig = {
 	output: {
 		filename: 'all.bundle.js',
 		path: BUILD_DIR,
-		publicPath: '/public/'
+		publicPath: '/'
 	},
 	module: {
 		loaders: [
@@ -28,6 +28,10 @@ var webpackProdConfig = {
 				test: /\.(jp[e]?g|png|gif|svg)$/i,
 				loader: 'file-loader?name=img/[name].[ext]'
 			},
+			{
+				test: /\.html$/,
+				loader: 'file-loader?name=[name].[ext]'
+			}
 		]
 	},
 	plugins: [

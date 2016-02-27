@@ -3,8 +3,8 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 //path permet de résoudre les chemins relatifs en absolus via __dirname et path.resolve notamment:
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'public');
-var APP_DIR = path.resolve(__dirname, 'src');
+var BUILD_DIR = path.resolve(__dirname, '../public');
+var APP_DIR = path.resolve(__dirname, '../src');
 var webpackDevConfig = {
 	//Fichier d'entrée où toutes les dépendances et ressources à inclure 
 	//seront cherchées récursivement:
@@ -21,7 +21,13 @@ var webpackDevConfig = {
 		//de publicPath+URL du require (cf. img/toto.jpg dans un component devient: /public/img/toto.jpg):
 		//Il est utile si les ressources sont situés dans un autre domaine (par exemple, publicPath: 'http://www.toto.fr/assets')
 		//La plupart du temps publicPath = chemin relatif de path:
-		publicPath: '/public/'
+		//publicPath: '/public/'
+		//Cependant:
+		//Puisqu'on a configuré http-server pour que le répertoire racine soit ./public,
+		//la résolution url des fichiers statiques faîtes par publicPath correspond
+		//au chemin relatif par rapport à ./public soit ./ (si index.html était situé un répertoire
+		//au-dessus de public (comme auparavant) on aurait setté publicPath à '/public/')
+		publicPath: '/'
 	},
 	module: {
 		//Pour plus de détails sur comment fonctionne la
@@ -58,6 +64,11 @@ var webpackDevConfig = {
 				loader: 'file-loader?name=img/[name].[ext]'
 				//loader:'file-loader?name=[path]/[name].[ext]'
 			},
+			{
+				//HTML Loader:
+				test: /\.html$/,
+				loader: 'file-loader?name=[name].[ext]'
+			}
 		]
 	},
 	// Le plugin ExtractTextPlugin permet d'assembler tous les css précédemment extrait dans un seul fichier css:

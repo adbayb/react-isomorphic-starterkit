@@ -5,11 +5,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf ./public",
-    "dev:watch": "webpack -d --watch --colors --config webpack.config.dev.js",
-    "dev:build": "webpack -d --colors --config webpack.config.dev.js",
-    "dev:deploy": "node webpack.server.js",
-    "prod:build": "webpack -p --progress --colors --config webpack.config.prod.js",
-    "prod:server": "http-server ./",
+    "dev:watch": "webpack -d --watch --colors --config ./config/webpack.config.dev.js",
+    "dev:build": "webpack -d --colors --config ./config/webpack.config.dev.js",
+    "dev:deploy": "node ./config/webpack.server.js",
+    "prod:build": "webpack -p --progress --colors --config ./config/webpack.config.prod.js",
+    "prod:server": "http-server ./public",
     "prod:deploy": "concurrent \"npm run prod:build\" \"npm run prod:server\"",
     "start": "npm run dev:deploy"
   },
