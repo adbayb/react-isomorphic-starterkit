@@ -1,7 +1,7 @@
 {
   "name": "reactjs-starterkit",
   "version": "1.0.0",
-  "description": "A React.js boilerplate with Webpack and react-router",
+  "description": "A React.js isomorphic template with Webpack and react-router",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "node ./bin/clean.js",
