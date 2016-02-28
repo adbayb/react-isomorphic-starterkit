@@ -2,14 +2,14 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, '../public');
-var APP_DIR = path.resolve(__dirname, '../src');
+var BUILD_DIR = path.resolve(__dirname, '..', 'public');
+var APP_DIR = path.resolve(__dirname, '..', 'src');
 var webpackProdConfig = {
 	entry: [
-		APP_DIR + '/index.jsx'
+		APP_DIR + '/client.jsx'
 	],
 	output: {
-		filename: 'all.bundle.js',
+		filename: 'client.bundle.js',
 		path: BUILD_DIR,
 		publicPath: '/'
 	},
@@ -30,6 +30,10 @@ var webpackProdConfig = {
 			},
 			{
 				test: /\.html$/,
+				loader: 'file-loader?name=[name].[ext]'
+			},
+			{
+				test: /\.ico$/,
 				loader: 'file-loader?name=[name].[ext]'
 			}
 		]

@@ -3,18 +3,21 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 //path permet de résoudre les chemins relatifs en absolus via __dirname et path.resolve notamment:
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, '../public');
-var APP_DIR = path.resolve(__dirname, '../src');
+var BUILD_DIR = path.resolve(__dirname, '..', 'public');
+var APP_DIR = path.resolve(__dirname, '..', 'src');
 var webpackDevConfig = {
 	//Fichier d'entrée où toutes les dépendances et ressources à inclure 
 	//seront cherchées récursivement:
 	entry: [
 		'webpack-dev-server/client?http://localhost:8080',//WebpackDevServer host et port
 		'webpack/hot/only-dev-server',//"only" permet d'empêcher le rechargement lors d'erreurs de syntaxes
-		APP_DIR + '/index.jsx' //fichier d'entrée principale de notre code source
+		APP_DIR + '/client.jsx' //fichier d'entrée principale de notre code source
 	],
+	//Inutile de spécifier target: "web" car par défault
+	//(web pour compiler pour une utilisation sur un environnement browser-like):
+	//target: 'web',
 	output: {
-		filename: 'all.bundle.js',
+		filename: 'client.bundle.js',
 		//path spécifie le dossier de destination des fichiers loadés et/ou bundlés (en chemin absolu):
 		path: BUILD_DIR,
 		//publicPath spécifie l'url publique des ressources bundlées/loadées: lorsqu'un require est rencontré, son URL de sortie sera composé
@@ -67,6 +70,11 @@ var webpackDevConfig = {
 			{
 				//HTML Loader:
 				test: /\.html$/,
+				loader: 'file-loader?name=[name].[ext]'
+			},
+			{
+				//ICO Loader:
+				test: /\.ico$/,
 				loader: 'file-loader?name=[name].[ext]'
 			}
 		]

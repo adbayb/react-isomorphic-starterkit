@@ -1,5 +1,6 @@
 import React from "react";
-import {browserHistory, Router, Route, Link, IndexRoute} from "react-router";
+import {browserHistory, Router, Route, IndexRoute} from "react-router";
+import App from "./components/app.jsx";
 import ExampleComponent from "./components/example/example.jsx";
 import HeaderComponent from "./components/header/header.jsx";
 import WelcomeComponent from "./components/welcome/welcome.jsx";
@@ -7,33 +8,7 @@ import NavbarComponent from "./components/navbar/navbar.jsx";
 import SingleComponent from "./components/single/single.jsx";
 import NotFoundComponent from "./components/404/404.jsx";
 
-let styles = {
-	color: 'white',
-	backgroundColor: 'red',
-	minHeight: 100
-};
-
-class App extends React.Component {
-	render() {
-		//console.log(this.props.children);
-		return (
-			<div>
-				<div style={styles}>
-					<h1> React template with Webpack, react-router and react-hot-loader </h1>
-				</div>
-
-				{/*Rendu des composants des routes enfants*/}
-				{this.props.children}
-
-				<div>
-					<Link to="/">Go back</Link>
-				</div>
-			</div>
-		);
-	}
-}
-
-App.routes = (
+export default (
 	/*
 	<Router history={browserHistory}>
 	permet de gérer les url plus proprement (i.e sans les références du style ?_k=nt2q3u
@@ -69,16 +44,9 @@ App.routes = (
 					 */}
 				</Route>
 			</Route>
-			{/*No match route (route par défaut si non trouvé):*/}
-			<Route path="*" component={NotFoundComponent}/>
 		</Route>
 
 		{/*No match route (route par défaut si non trouvé):*/}
 		<Route path="*" component={NotFoundComponent}/>
 	</Router>
 );
-
-//render par défaut sans react-router:
-//render(<App/>, document.getElementById('app'));
-
-export default App;

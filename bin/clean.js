@@ -11,7 +11,7 @@ else
 //del([folder+'/**', '!'+folder, '!'+folder+'/index.html']).then(paths => {
 del([folder + '/**']).then(paths => {
 	if(paths.length > 0)
-		console.log(folder + ' folder successfully cleaned (index.html remains)');
+		console.log(folder + ' folder successfully removed');
 	else
-		console.log('Error during cleaning folder ' + folder);
+		console.log('Error while deleting ' + folder + ' folder');
 });
