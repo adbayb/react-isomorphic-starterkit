@@ -62,6 +62,9 @@ var webpackServerSideConfig = {
 			}
 		]
 	},
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
 	plugins: [
 		new ExtractTextPlugin('all.bundle.css')
 	]

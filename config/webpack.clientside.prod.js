@@ -38,6 +38,9 @@ var webpackProdConfig = {
 			}
 		]
 	},
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
 	plugins: [
 		new ExtractTextPlugin('all.bundle.css')
 	]

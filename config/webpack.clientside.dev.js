@@ -79,6 +79,15 @@ var webpackDevConfig = {
 			}
 		]
 	},
+	//resolve permet de spécifier les extensions par défault (i.e. les types de fichiers où il
+	//n'est pas nécessaire de spécifier leur extensions dans le require ou import (exemple require('toto') <=> require('toto.js'))
+	//resolve est notamment utile dans le cas où on utiliserait typescript (car import de module et non de fichier => on ne peut
+	//pas spécifier l'extension dans l'import):
+	//enfin en spécifiant '', cela autorise webpack à résoudre les fichiers avec extensions donc @ ne pas enlever!:
+	//cf. https://github.com/webpack/docs/wiki/configuration#resolveextensions
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
 	// Le plugin ExtractTextPlugin permet d'assembler tous les css précédemment extrait dans un seul fichier css:
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),

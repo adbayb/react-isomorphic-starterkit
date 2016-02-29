@@ -1,6 +1,8 @@
 import React from "react";
 import {renderToString} from "react-dom/server";
 import {match, RouterContext} from "react-router";
+//on peut ne pas spécifier l'extension jsx dans l'import car extension
+//configurée par défaut dans les configs webpack:
 import routes from "./routes.jsx";
 import "./favicon.ico";
 
@@ -9,7 +11,7 @@ function renderHTML(componentHTML) {
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Boilerplate React.JS (starter kit with webpack)</title>
+	<title>React Starter kit (Webpack, react-router)</title>
 	<link rel="stylesheet" href="/all.bundle.css">
 </head>
 <body>
