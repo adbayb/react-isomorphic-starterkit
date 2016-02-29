@@ -5,15 +5,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "node ./bin/clean.js",
-    "dev:watch": "webpack -d --watch --colors --config ./config/webpack.clientside.dev.js",
+	"server:clientside": "node ./bin/server/clientSideRendering.js",
+    "server:serverside": "node ./bin/server/serverSideRendering.js",
+    "dev:watch:webpack": "webpack -d --watch --colors --config ./config/webpack.clientside.dev.js",
     "dev:build": "webpack -d --colors --config ./config/webpack.clientside.dev.js",
-    "dev:deploy": "node ./bin/server/hotReload.js",
+    "dev:watch": "node ./bin/server/hotReload.js",
     "prod:build:clientside": "webpack -p --progress --colors --config ./config/webpack.clientside.prod.js",
     "prod:build:serverside": "webpack -p --progress --colors --config ./config/webpack.serverside.js",
-    "prod:server:clientside": "node ./bin/server/clientSideRendering.js",
-    "prod:server:serverside": "node ./bin/server/serverSideRendering.js",
-    "prod:deploy:clientside": "npm run prod:build:clientside && npm run prod:server:clientside",
-    "prod:deploy:serverside": "npm run prod:build:serverside && npm run prod:server:serverside",
+    "prod:deploy:clientside": "npm run prod:build:clientside && npm run server:clientside",
+    "prod:deploy:serverside": "npm run prod:build:serverside && npm run server:serverside",
     "prod:deploy": "npm run prod:deploy:serverside"
   },
   "repository": {
