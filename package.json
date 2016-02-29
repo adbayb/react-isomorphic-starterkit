@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "node ./bin/clean.js",
-	"server:clientside": "node ./bin/server/clientSideRendering.js",
+    "server:clientside": "node ./bin/server/clientSideRendering.js",
     "server:serverside": "node ./bin/server/serverSideRendering.js",
     "dev:watch:webpack": "webpack -d --watch --colors --config ./config/webpack.clientside.dev.js",
     "dev:build": "webpack -d --colors --config ./config/webpack.clientside.dev.js",
