@@ -9,9 +9,11 @@ var webpackDevConfig = {
 	//Fichier d'entrée où toutes les dépendances et ressources à inclure 
 	//seront cherchées récursivement:
 	entry: [
-		'webpack-dev-server/client?http://localhost:8080',//WebpackDevServer host et port
-		'webpack/hot/only-dev-server',//"only" permet d'empêcher le rechargement lors d'erreurs de syntaxes
-		APP_DIR + '/client.jsx' //fichier d'entrée principale de notre code source
+		'webpack-dev-server/client?http://localhost:8080', //WebpackDevServer host et port
+		'webpack/hot/only-dev-server', //"only" permet d'empêcher le rechargement lors d'erreurs de syntaxes
+		//fichier d'entrée principale de notre code source (client et non client.jsx comme le dossier 
+		//contient index.jsx donc automatiquement loadé lorsque l'on spécifie le dossier):
+		APP_DIR + '/client' 
 	],
 	//Inutile de spécifier target: "web" car par défault
 	//(web pour compiler pour une utilisation sur un environnement browser-like):

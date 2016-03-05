@@ -3,7 +3,7 @@ import {renderToString} from "react-dom/server";
 import {match, RouterContext} from "react-router";
 //on peut ne pas spécifier l'extension jsx dans l'import car extension
 //configurée par défaut dans les configs webpack:
-import routes from "./routes.jsx";
+import routes from "../shared/routes.jsx";
 import "./favicon.ico";
 
 function renderHTML(componentHTML) {

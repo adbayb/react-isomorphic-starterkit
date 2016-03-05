@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import routes from "./routes.jsx";
+import routes from "../shared/routes.jsx";
 import "./index.html";
 import "./favicon.ico";
 
