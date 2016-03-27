@@ -1,6 +1,6 @@
 # React Starter Kit
 
-An isomorphic React boilerplate with Webpack (CSS loader, JSX/JS loader, Image loader), React Router and React Hot Loader. <br/>Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). <br/> All necessary tools are set up to start quickly your React project !
+An isomorphic React boilerplate with Webpack (SASS/CSS loader, JSX/JS loader, Image loader), React Router and React Hot Loader. <br/>Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). <br/> All necessary tools are set up to start quickly your React project !
 
 <br/>
 ## Getting Started
