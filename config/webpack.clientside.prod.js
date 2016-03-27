@@ -22,7 +22,11 @@ var webpackProdConfig = {
 			},
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+				loader: ExtractTextPlugin.extract("css")
+			},
+			{
+				test: /\.scss$/,
+				loader: ExtractTextPlugin.extract('css!sass')
 			},
 			{
 				test: /\.(jp[e]?g|png|gif|svg)$/i,
