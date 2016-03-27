@@ -46,11 +46,11 @@ var webpackServerSideConfig = {
 			},
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract("css")
+				loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
 			},
 			{
 				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract('css!sass')
+				loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
 			},
 			{
 				test: /\.(jp[e]?g|png|gif|svg)$/i,
