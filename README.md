@@ -1,13 +1,13 @@
 # React Isomorphic Starter Kit
 
-An isomorphic React boilerplate with Webpack (SASS/CSS loader, JSX/JS loader, Image loader), React Router and React Hot Loader. <br/>Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). <br/> All necessary tools are set up to start quickly your React project !
+An isomorphic React boilerplate with Webpack (SASS/CSS loader, JSX/JS loader, Image loader), React Router, React Hot Loader and ESLint static code verification. <br/>Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). <br/> All necessary tools are set up to start quickly your React project !
 
 <br/>
 ## Getting Started
 
 To begin with this starter kit project, simply follow these steps:
 
-- [x] Clone repository: `git clone https://github.com/ayoubdev/reactjs-typescript-starterkit.git`
+- [x] Clone repository: `git clone https://github.com/ayoubdev/reactjs-isomorphic-starterkit.git`
 - [x] Go to cloned directory and feel free to modify `package.json` information (like project name, description...):
 - [x] Run these cli commands: `npm install && npm run prod:deploy`
 - [x] Open this URL and enjoy: `http://localhost:8080/`
