@@ -14,4 +14,8 @@ class SingleComponent extends React.Component {
 	}
 }
 
+SingleComponent.propTypes = {
+	children: React.PropTypes.element.isRequired
+};
+
 export default SingleComponent;

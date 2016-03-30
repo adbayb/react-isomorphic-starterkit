@@ -9,8 +9,8 @@ class ExampleComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				<p className="text"> I'm the example Component and I'm lazy </p>
-				<img src={require('./img/react.png')} className="logo"/>
+				<p className="text"> I"m the example Component and I"m lazy </p>
+				<img src={require("./img/react.png")} className="logo"/>
 			</div>
 		);
 	}

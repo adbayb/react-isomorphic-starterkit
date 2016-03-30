@@ -1,6 +1,6 @@
-var express = require('express');
-var compress = require('compression');
-var path = require('path');
+var express = require("express");
+var compress = require("compression");
+var path = require("path");
 var customServerRendering = require("../../public/server.bundle.js");
 //console.log(customServerRendering);
 var server = express();
@@ -16,12 +16,12 @@ const port = process.env.PORT || 8080;
 server.use(compress({threshold: 0}));
 //On définit le répertoire contenant les fichiers statiques (images, css ...)
 //pour que ces derniers soient résolues par /ressource.ext au lieu de /public/ressource.ext:
-server.use(express.static(path.resolve(__dirname, '..', '..', 'public')));
+server.use(express.static(path.resolve(__dirname, "..", "..", "public")));
 //On appelle (montage) la fonction middleware définie dans /src/components/server.jsx
 //à chaque requêtage serveur/client via la fonction server.use.
-//En spécifiant un path (par exemple server.use('/admin', function...)), le middleware
+//En spécifiant un path (par exemple server.use("/admin", function...)), le middleware
 //sera exécuté à chaque fois que la base de la requête matche le path spécifié. Si aucun path
-//n'est spécifié (<=> '/'), le middleware s'appliquera sur toutes les requêtes!:
+//n"est spécifié (<=> "/"), le middleware s"appliquera sur toutes les requêtes!:
 server.use(function(req, res) {
 	customServerRendering.default(req, res);
 });
@@ -29,5 +29,5 @@ server.use(function(req, res) {
 //TODO: utiliser an http api pour logguer les GET, POST...:
 server.listen(port, function() {
 	var host = this.address().address;
-	console.log('Server launched at http://%s:%s', host, port);
+	console.log("Server launched at http://%s:%s", host, port);
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import {renderToString} from "react-dom/server";
 import {match, RouterContext} from "react-router";
-//on peut ne pas spécifier l'extension jsx dans l'import car extension
+//on peut ne pas spécifier l"extension jsx dans l"import car extension
 //configurée par défaut dans les configs webpack:
 import routes from "../shared/routes.jsx";
 import "./favicon.ico";
@@ -27,8 +27,8 @@ function renderHTML(componentHTML) {
 export default function(req, res) {
 	console.log(req.url);
 	/*
-	if(req.url.indexOf('.ico') !== -1)
-		console.log('ICO file');
+	if(req.url.indexOf(".ico") !== -1)
+		console.log("ICO file");
 	*/
 	match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
 		if(error) {
@@ -38,8 +38,7 @@ export default function(req, res) {
 		} else if(renderProps) {
 			res.status(200).send(renderHTML(renderToString(<RouterContext {...renderProps} />)));
 		} else {
-			res.status(404).send('Not found');
+			res.status(404).send("Not found");
 		}
 	});
-};
-
+}

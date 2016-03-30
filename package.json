@@ -4,6 +4,7 @@
   "description": "A React.js isomorphic template with Webpack and react-router",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run prod:deploy",
     "clean": "node ./bin/clean.js",
     "server:clientside": "node ./bin/server/clientSideRendering.js",
     "server:serverside": "node ./bin/server/serverSideRendering.js",
@@ -29,6 +30,7 @@
     "react-router",
     "boilerplate",
     "starter",
+    "isomorphic",
     "kit",
     "starterkit",
     "starter-kit"
@@ -42,6 +44,8 @@
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
+    "eslint": "^2.5.3",
+    "eslint-plugin-react": "^4.2.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "fs": "0.0.2",

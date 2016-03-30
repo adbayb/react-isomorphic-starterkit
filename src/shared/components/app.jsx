@@ -2,8 +2,8 @@ import React from "react";
 import {Link} from "react-router";
 
 let styles = {
-	color: 'white',
-	backgroundColor: 'red',
+	color: "white",
+	backgroundColor: "red",
 	minHeight: 100
 };
 
@@ -27,7 +27,11 @@ class App extends React.Component {
 	}
 }
 
+App.propTypes = {
+	children: React.PropTypes.element.isRequired
+};
+
 //render par défaut sans react-router:
-//render(<App/>, document.getElementById('app'));
+//render(<App/>, document.getElementById("app"));
 
 export default App;
