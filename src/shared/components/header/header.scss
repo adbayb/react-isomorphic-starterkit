@@ -1,3 +1,35 @@
+/*
+:local(.test) est une syntaxe webpack css-modules permettant de transformer le nom de classe .test ici par
+un nom de classe unique (hashé) permettant de scoper localement .test au composant (un export js
+spécifie le mapping entre .test et son nouveau nom scopé, un import de l'objet buttonStyle sur cette feuille de style
+permettra donc d'accéder à la valeur du mapping via buttonStyle.test (Par exemple: Object {test: "_3Uf3PY71kz9srJ-aTZKxny"})):
+
+:local n'est applicable que sur des noms de classe: faire un :local(p) ne fera aucun mapping et p sera en global.
+Dans ce cas, deux solutions s'offre à nous pour rendre l'élément html p local au composant:
+	=> soit passer par un un parent scopé. Par exemple:
+		:local(.parentClassName) {
+			& > p {
+				...
+			}
+		}
+	=> soit attaché un nom de classe à p (par exemple: <p class="pClassName"></p>):
+		:local(.pClassName) {
+			...
+		}
+
+CSS Modules permet également de générer des animations scopées via keyframes
+(cf. https://css-modules.github.io/webpack-demo (fin de page)).
+
+Il est possible d'activer le mapping scope local sur toutes les classNames sans devoir spécifier à chaque fois :local(.className)
+mais directement .className. Pour cela, il suffit de configurer le loader Webpack CSSModules (cf config webpack):
+Exemple de config webpack permettant de le faire:
+	loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]!sass-loader")
+	?modules permet d'autoriser le mapping en scope local par défaut dans les fichiers css: il n'est donc plus nécessaire
+	de spécifier :local(.className) pour activer le mapping sur .className. Par contre, on doit spécifier :global(.className)
+	pour désactiver le mapping sur className.
+	?localIdentName permet de formatter le mapping du nom de classe scopé afin d'en faciliter le debug (par défault base64:16).
+*/
+
 header {
 	width: 100vw;
 	height: 10vh;

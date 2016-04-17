@@ -59,12 +59,17 @@ var webpackDevConfig = {
 				// On aurait très bien pu spécifier la contrainte include sur APP_DIR
 				//mais inutile dans le cas où on a du CSS situé en dehors de APP_DIR et que l"on veut inclure:
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+				//?modules permet d'activer le scope local au js appelant par défaut dans les fichiers css: il n'est donc plus nécessaire
+				//de spécifier :local(.className) dans le CSS pour activer le mapping sur .className. Par contre, on doit spécifier :global(.className)
+				//pour désactiver le mapping sur className.
+				//?localIdentName permet de formatter le mapping du nom de classe scopé (identifiant name) afin d'en faciliter le debugging (par défault base64:16).
+				//cf. https://github.com/webpack/css-loader
+				loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]")
 			},
 			{
 				//SASS Loader:
 				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+				loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]!sass-loader")
 			},
 			{
 				//Image loader:

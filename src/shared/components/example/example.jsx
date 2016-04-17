@@ -1,5 +1,5 @@
 import React from "react";
-import "./example.css";
+import styles from "./example.css";
 
 class ExampleComponent extends React.Component {
 	constructor(props) {
@@ -9,7 +9,7 @@ class ExampleComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				<p className="text"> I"m the example Component and I"m lazy </p>
+				<p className={styles.text}> I"m the example Component and I"m lazy </p>
 				<img src={require("./img/react.png")} className="logo"/>
 			</div>
 		);
