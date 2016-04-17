@@ -10,7 +10,7 @@ class ExampleComponent extends React.Component {
 		return (
 			<div>
 				<p className={styles.text}> I"m the example Component and I"m lazy </p>
-				<img src={require("./img/react.png")} className="logo"/>
+				<img src={require("./img/react.png")} className={styles.logo}/>
 			</div>
 		);
 	}
