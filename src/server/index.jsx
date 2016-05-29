@@ -1,6 +1,6 @@
 import React from "react";
-import {renderToString} from "react-dom/server";
-import {match, RouterContext} from "react-router";
+import { renderToString } from "react-dom/server";
+import { match, RouterContext } from "react-router";
 //on peut ne pas spécifier l"extension jsx dans l"import car extension
 //configurée par défaut dans les configs webpack:
 import routes from "../shared/routes.jsx";
@@ -16,6 +16,8 @@ function renderHTML(componentHTML) {
 </head>
 <body>
 	${componentHTML}
+
+	<script src="/all.bundle.js"></script>
 </body>
 </html>
 	`;
@@ -30,7 +32,7 @@ export default function(req, res) {
 	if(req.url.indexOf(".ico") !== -1)
 		console.log("ICO file");
 	*/
-	match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
+	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 		if(error) {
 			res.status(500).send(error.message);
 		} else if(redirectLocation) {

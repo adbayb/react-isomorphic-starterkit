@@ -1,10 +1,10 @@
 import React from "react";
-import {Link} from "react-router";
+import { Link } from "react-router";
 
 class NavbarComponent extends React.Component {
 	render() {
 		//console.log(this.props.children);
-		return (
+		return(
 			<nav>
 				<ul>
 					<li><Link to="/single/example">Link to Example component</Link></li>

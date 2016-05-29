@@ -1,5 +1,5 @@
 import React from "react";
-import {browserHistory, Router, Route, IndexRoute} from "react-router";
+import { browserHistory, Router, Route, IndexRoute } from "react-router";
 import App from "./components/app.jsx";
 import ExampleComponent from "./components/example/example.jsx";
 import HeaderComponent from "./components/header/header.jsx";
@@ -8,7 +8,7 @@ import NavbarComponent from "./components/navbar/navbar.jsx";
 import SingleComponent from "./components/single/single.jsx";
 import NotFoundComponent from "./components/404/404.jsx";
 
-export default (
+export default(
 	/*
 	<Router history={browserHistory}>
 	permet de gérer les url plus proprement (i.e sans les références du style ?_k=nt2q3u

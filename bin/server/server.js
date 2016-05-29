@@ -1,7 +1,7 @@
 var express = require("express");
 var compress = require("compression");
 var path = require("path");
-var customServerRendering = require("../../public/server.bundle.js");
+var customServerRendering = require("../../public/all.bundle.js");
 //console.log(customServerRendering);
 var server = express();
 const port = process.env.PORT || 8080;
@@ -13,7 +13,7 @@ const port = process.env.PORT || 8080;
 
 //threshold spécifie le nombre de bytes minimum pour activer la compression (par défault, 1kb), on le
 //set à 0 pour activer tout le temps la compression de notre réponse serveur:
-server.use(compress({threshold: 0}));
+server.use(compress({ threshold: 0 }));
 //On définit le répertoire contenant les fichiers statiques (images, css ...)
 //pour que ces derniers soient résolues par /ressource.ext au lieu de /public/ressource.ext:
 server.use(express.static(path.resolve(__dirname, "..", "..", "public")));

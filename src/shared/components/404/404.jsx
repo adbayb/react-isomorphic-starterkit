@@ -6,7 +6,7 @@ class NotFoundComponent extends React.Component {
 	}
 
 	render() {
-		return (
+		return(
 			<div className="404">
 				<p>
 					Oups, route not found :( [404]

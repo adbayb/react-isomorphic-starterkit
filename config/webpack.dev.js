@@ -19,7 +19,7 @@ var webpackDevConfig = {
 	//(web pour compiler pour une utilisation sur un environnement browser-like):
 	//target: "web",
 	output: {
-		filename: "client.bundle.js",
+		filename: "all.bundle.js",
 		//path spécifie le dossier de destination des fichiers loadés et/ou bundlés (en chemin absolu):
 		path: BUILD_DIR,
 		//publicPath spécifie l"url publique des ressources bundlées/loadées: lorsqu"un require est rencontré, son URL de sortie sera composé
@@ -37,59 +37,56 @@ var webpackDevConfig = {
 	module: {
 		//Pour plus de détails sur comment fonctionne la
 		//configuration webpack: https://webpack.github.io/docs/configuration.html
-		loaders: [
-			{
-				//exclude est inutile si include est spécifié (sauf si on veut
-				//exclure un dossier contenu dans un dossier inclu)
-				//Le loader react-hot permet d"activer hot refresh sur le code:
-				//il doit être placé avant tous les autres loaders
-				//(cf. https://gaearon.github.io/react-hot-loader/getstarted/):
-				//(si plusieurs loaders, mettre loaders: [] au lieu de loader:)
-				test: /\.js[x]?$/,
-				//exclude: /node_modules/,
-				include: APP_DIR,
-				loaders: [
-					"react-hot",
-					"babel-loader"
-				]
-			},
-			{
-				//CSS Loader:
-				// On extrait tous les contenus des css via ExtractTextPlugin.extract:
-				// On aurait très bien pu spécifier la contrainte include sur APP_DIR
-				//mais inutile dans le cas où on a du CSS situé en dehors de APP_DIR et que l"on veut inclure:
-				test: /\.css$/,
-				//?modules permet d'activer le scope local au js appelant par défaut dans les fichiers css: il n'est donc plus nécessaire
-				//de spécifier :local(.className) dans le CSS pour activer le mapping sur .className. Par contre, on doit spécifier :global(.className)
-				//pour désactiver le mapping sur className.
-				//?localIdentName permet de formatter le mapping du nom de classe scopé (identifiant name) afin d'en faciliter le debugging (par défault base64:16).
-				//cf. https://github.com/webpack/css-loader
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]")
-			},
-			{
-				//SASS Loader:
-				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]!sass-loader")
-			},
-			{
-				//Image loader:
-				//Le plugin file permet de chercher toutes les images et de les inclure dans output.path?name
-				//Pour plus de détails: https://github.com/webpack/file-loader/blob/master/README.md
-				test: /\.(jp[e]?g|png|gif|svg)$/i,
-				loader: "file-loader?name=img/[name].[ext]"
+		loaders: [{
+			//exclude est inutile si include est spécifié (sauf si on veut
+			//exclure un dossier contenu dans un dossier inclu)
+			//Le loader react-hot permet d"activer hot refresh sur le code:
+			//il doit être placé avant tous les autres loaders
+			//(cf. https://gaearon.github.io/react-hot-loader/getstarted/):
+			//(si plusieurs loaders, mettre loaders: [] au lieu de loader:)
+			test: /\.js[x]?$/,
+			//exclude: /node_modules/,
+			include: APP_DIR,
+			loaders: [
+				"react-hot",
+				//Injection des query via JSON.stringify dans le cas où query ne
+				//fonctionne pas (comme ici on a un tableau de loaders):
+				"babel-loader?" + JSON.stringify({
+					presets: ["es2015", "react"]
+				})
+			]
+		}, {
+			//CSS Loader:
+			// On extrait tous les contenus des css via ExtractTextPlugin.extract:
+			// On aurait très bien pu spécifier la contrainte include sur APP_DIR
+			//mais inutile dans le cas où on a du CSS situé en dehors de APP_DIR et que l"on veut inclure:
+			test: /\.css$/,
+			//?modules permet d'activer le scope local au js appelant par défaut dans les fichiers css: il n'est donc plus nécessaire
+			//de spécifier :local(.className) dans le CSS pour activer le mapping sur .className. Par contre, on doit spécifier :global(.className)
+			//pour désactiver le mapping sur className.
+			//?localIdentName permet de formatter le mapping du nom de classe scopé (identifiant name) afin d'en faciliter le debugging (par défault base64:16).
+			//cf. https://github.com/webpack/css-loader
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]")
+		}, {
+			//SASS Loader:
+			test: /\.scss$/,
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]!sass-loader")
+		}, {
+			//Image loader:
+			//Le plugin file permet de chercher toutes les images et de les inclure dans output.path?name
+			//Pour plus de détails: https://github.com/webpack/file-loader/blob/master/README.md
+			test: /\.(jp[e]?g|png|gif|svg)$/i,
+			loader: "file-loader?name=img/[name].[ext]"
 				//loader:"file-loader?name=[path]/[name].[ext]"
-			},
-			{
-				//HTML Loader:
-				test: /\.html$/,
-				loader: "file-loader?name=[name].[ext]"
-			},
-			{
-				//ICO Loader:
-				test: /\.ico$/,
-				loader: "file-loader?name=[name].[ext]"
-			}
-		]
+		}, {
+			//HTML Loader:
+			test: /\.html$/,
+			loader: "file-loader?name=[name].[ext]"
+		}, {
+			//ICO Loader:
+			test: /\.ico$/,
+			loader: "file-loader?name=[name].[ext]"
+		}]
 	},
 	//resolve permet de spécifier les extensions par défault (i.e. les types de fichiers où il
 	//n"est pas nécessaire de spécifier leur extensions dans le require ou import (exemple require("toto") <=> require("toto.js"))

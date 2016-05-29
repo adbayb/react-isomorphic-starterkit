@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router";
+import { Link } from "react-router";
 
 let styles = {
 	color: "white",
@@ -10,7 +10,7 @@ let styles = {
 class App extends React.Component {
 	render() {
 		//console.log(this.props.children);
-		return (
+		return(
 			<div>
 				<div style={styles}>
 					<h1> React template with Webpack, react-router and react-hot-loader </h1>

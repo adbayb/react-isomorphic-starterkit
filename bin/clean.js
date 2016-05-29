@@ -13,5 +13,5 @@ del([folder + "/**"]).then(paths => {
 	if(paths.length > 0)
 		console.log(folder + " folder successfully removed");
 	else
-		console.log("Error while deleting " + folder + " folder");
+		console.log("No need to remove " + folder + " folder");
 });

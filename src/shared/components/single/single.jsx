@@ -6,7 +6,7 @@ class SingleComponent extends React.Component {
 	}
 
 	render() {
-		return (
+		return(
 			<div className="container single">
 				{this.props.children}
 			</div>

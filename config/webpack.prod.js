@@ -27,7 +27,7 @@ var webpackServerSideConfig = {
 	//Une regexp permet de faire le tri:
 	externals: /^[a-z\-0-9]+$/,
 	output: {
-		filename: "server.bundle.js",
+		filename: "all.bundle.js",
 		path: BUILD_DIR,
 		publicPath: "/",
 		//output.libraryTarget permet de spécifier le type du bundle (commonjs ou AMD pour
@@ -38,33 +38,31 @@ var webpackServerSideConfig = {
 		libraryTarget: "commonjs"
 	},
 	module: {
-		loaders: [
-			{
-				test: /\.js[x]?$/,
-				include: APP_DIR,
-				loader: "babel-loader"
-			},
-			{
-				test: /\.css$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]")
-			},
-			{
-				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]!sass-loader")
-			},
-			{
-				test: /\.(jp[e]?g|png|gif|svg)$/i,
-				loader: "file-loader?name=img/[name].[ext]"
-			},
-			{
-				test: /\.html$/,
-				loader: "file-loader?name=[name].[ext]"
-			},
-			{
-				test: /\.ico$/,
-				loader: "file-loader?name=[name].[ext]"
+		loaders: [{
+			test: /\.js[x]?$/,
+			include: APP_DIR,
+			loader: "babel-loader",
+			//query est équivalent à faire babel-loader?presets=... évitant ainsi de
+			//devoir spécifier les presets babel dans package.json ou .babelrc
+			query: {
+				presets: ["es2015", "react"]
 			}
-		]
+		}, {
+			test: /\.css$/,
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]")
+		}, {
+			test: /\.scss$/,
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]!sass-loader")
+		}, {
+			test: /\.(jp[e]?g|png|gif|svg)$/i,
+			loader: "file-loader?name=img/[name].[ext]"
+		}, {
+			test: /\.html$/,
+			loader: "file-loader?name=[name].[ext]"
+		}, {
+			test: /\.ico$/,
+			loader: "file-loader?name=[name].[ext]"
+		}]
 	},
 	resolve: {
 		extensions: ["", ".js", ".jsx"]

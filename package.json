@@ -6,16 +6,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run prod:deploy",
     "clean": "node ./bin/clean.js",
-    "server:clientside": "node ./bin/server/clientSideRendering.js",
-    "server:serverside": "node ./bin/server/serverSideRendering.js",
-    "dev:watch:webpack": "webpack -d --watch --colors --config ./config/webpack.clientside.dev.js",
-    "dev:build": "webpack -d --colors --config ./config/webpack.clientside.dev.js",
-    "dev:watch": "node ./bin/server/hotReload.js",
-    "prod:build:clientside": "webpack -p --progress --colors --config ./config/webpack.clientside.prod.js",
-    "prod:build:serverside": "webpack -p --progress --colors --config ./config/webpack.serverside.js",
-    "prod:deploy:clientside": "npm run prod:build:clientside && npm run server:clientside",
-    "prod:deploy:serverside": "npm run prod:build:serverside && npm run server:serverside",
-    "prod:deploy": "npm run prod:deploy:serverside"
+    "server": "node ./bin/server/server.js",
+    "hot": "node ./bin/server/hotReload.js",
+    "dev:watch:webpack": "webpack -d --watch --colors --config ./config/webpack.dev.js",
+    "dev:build": "webpack -d --colors --config ./config/webpack.dev.js",
+    "prod:build": "npm run clean && webpack -p --progress --colors --config ./config/webpack.prod.js",
+    "prod:deploy": "npm run prod:build && npm run server"
   },
   "repository": {
     "type": "git",
@@ -62,11 +58,5 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ]
   }
 }
