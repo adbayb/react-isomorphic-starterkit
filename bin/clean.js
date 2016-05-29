@@ -5,7 +5,7 @@ var folder;
 if(process.argv[2])
 	folder = process.argv[2];
 else
-	folder = "public";
+	folder = "dist";
 
 //Pour exclure un fichier spécifique:
 //del([folder+"/**", "!"+folder, "!"+folder+"/index.html"]).then(paths => {

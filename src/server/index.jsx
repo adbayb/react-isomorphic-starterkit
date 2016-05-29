@@ -4,22 +4,24 @@ import { match, RouterContext } from "react-router";
 //on peut ne pas spécifier l"extension jsx dans l"import car extension
 //configurée par défaut dans les configs webpack:
 import routes from "../shared/routes.jsx";
-import "./favicon.ico";
 
 function renderHTML(componentHTML) {
 	//ES2015 template string:
 	return `<!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>React Starter kit (Webpack, react-router)</title>
-		<link rel="stylesheet" href="/all.bundle.css">
+		<link rel="stylesheet" href="/client.bundle.css">
 	</head>
-	<body>
-		${componentHTML}
 
-		<script src="/all.bundle.js"></script>
+	<body>
+		<div id="app">${componentHTML}</div>
+
+		<script src="/client.bundle.js"></script>
 	</body>
+
 </html>`;
 }
 

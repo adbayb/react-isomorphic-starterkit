@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run prod:deploy",
     "clean": "node ./bin/clean.js",
-    "server": "node ./bin/server/server.js",
+    "server": "node ./bin/server",
     "hot": "node ./bin/server/hotReload.js",
     "dev:watch:webpack": "webpack -d --watch --colors --config ./config/webpack.dev.js",
     "dev:build": "webpack -d --colors --config ./config/webpack.dev.js",
