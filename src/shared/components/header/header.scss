@@ -30,15 +30,13 @@ Exemple de config webpack permettant de le faire:
 	?localIdentName permet de formatter le mapping du nom de classe scopé afin d'en faciliter le debug (par défault base64:16).
 */
 
-header {
+.header {
 	width: 100vw;
 	height: 10vh;
 	background-color: red;
 }
 
-p {
-	&.header {
-		font-size: 3vmin;
-		color: yellowgreen;
-	}
+.text {
+	font-size: 3vmin;
+	color: yellowgreen;
 }

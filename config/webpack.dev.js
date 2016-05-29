@@ -5,7 +5,7 @@ var path = require("path");
 
 var BUILD_DIR = path.resolve(__dirname, "..", "public");
 var APP_DIR = path.resolve(__dirname, "..", "src");
-var webpackDevConfig = {
+var webpackConfig = {
 	//Fichier d"entrée où toutes les dépendances et ressources à inclure
 	//seront cherchées récursivement:
 	entry: [
@@ -104,4 +104,4 @@ var webpackDevConfig = {
 	]
 };
 
-module.exports = webpackDevConfig;
+module.exports = webpackConfig;

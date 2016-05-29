@@ -7,20 +7,20 @@ import routes from "../shared/routes.jsx";
 import "./favicon.ico";
 
 function renderHTML(componentHTML) {
+	//ES2015 template string:
 	return `<!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>React Starter kit (Webpack, react-router)</title>
-	<link rel="stylesheet" href="/all.bundle.css">
-</head>
-<body>
-	${componentHTML}
+	<head>
+		<meta charset="UTF-8">
+		<title>React Starter kit (Webpack, react-router)</title>
+		<link rel="stylesheet" href="/all.bundle.css">
+	</head>
+	<body>
+		${componentHTML}
 
-	<script src="/all.bundle.js"></script>
-</body>
-</html>
-	`;
+		<script src="/all.bundle.js"></script>
+	</body>
+</html>`;
 }
 
 //Définition de la fonction middleware qui sera utilisé par express à chaque requête client/serveur:

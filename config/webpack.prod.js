@@ -6,7 +6,7 @@ var BUILD_DIR = path.resolve(__dirname, "..", "public");
 var APP_DIR = path.resolve(__dirname, "..", "src");
 //Configuration Webpack pour générer un bundle qui sera utilisé par le serveur définit
 //dans /bin/server/serverSideRendering.js:
-var webpackServerSideConfig = {
+var webpackConfig = {
 	entry: [
 		APP_DIR + "/server"
 	],
@@ -72,4 +72,4 @@ var webpackServerSideConfig = {
 	]
 };
 
-module.exports = webpackServerSideConfig;
+module.exports = webpackConfig;

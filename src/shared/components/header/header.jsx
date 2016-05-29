@@ -8,8 +8,8 @@ class HeaderComponent extends React.Component {
 
 	render() {
 		return(
-			<header>
-				<p className={styles.header}> I'm the Header and I'm cool :) </p>
+			<header className={styles.header}>
+				<p className={styles.text}> I'm the Header and I'm cool :) </p>
 			</header>
 		);
 	}

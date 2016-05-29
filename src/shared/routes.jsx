@@ -2,7 +2,6 @@ import React from "react";
 import { browserHistory, Router, Route, IndexRoute } from "react-router";
 import App from "./components/app.jsx";
 import ExampleComponent from "./components/example/example.jsx";
-import HeaderComponent from "./components/header/header.jsx";
 import WelcomeComponent from "./components/welcome/welcome.jsx";
 import NavbarComponent from "./components/navbar/navbar.jsx";
 import SingleComponent from "./components/single/single.jsx";
@@ -31,7 +30,6 @@ export default(
 				 C'est la raison pour laquelle dans le render de App, on a ajouté
 				 {this.props.children} pour afficher les enfants*/}
 				<Route path="example" component={ExampleComponent}/>
-				<Route path="header" component={HeaderComponent}/>
 				<Route path="welcome" component={WelcomeComponent}>
 					{/*inutile de spécifier le component dans <Route path=":age"/>
 					 puisqu'on reste dans le contexte (composant) de la route parent*/}
