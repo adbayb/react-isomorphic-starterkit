@@ -5,7 +5,6 @@ var serverSideRendering = require("../../dist/server.bundle.js");
 //console.log(serverSideRendering);
 var server = express();
 
-console.log(serverSideRendering);
 const port = process.env.PORT || 8080;
 
 //Un article intéressant sur les différents avantages du server side rendering par
