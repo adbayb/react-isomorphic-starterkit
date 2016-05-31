@@ -2,6 +2,8 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require("path");
 
+//TODO: Add webpack optimization in prod client + server (+ env prod?)
+
 var CLIENT_BUILD_DIR = path.resolve(__dirname, "..", "dist", "client");
 var SERVER_BUILD_DIR = path.resolve(__dirname, "..", "dist", "server");
 var APP_DIR = path.resolve(__dirname, "..", "src");
