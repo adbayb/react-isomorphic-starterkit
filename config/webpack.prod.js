@@ -1,14 +1,18 @@
-var webpack = require("webpack");
+//var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require("path");
 
-var CLIENT_BUILD_DIR = path.resolve(__dirname, "..", "dist", "public");
-var SERVER_BUILD_DIR = path.resolve(__dirname, "..", "dist");
+var CLIENT_BUILD_DIR = path.resolve(__dirname, "..", "dist", "client");
+var SERVER_BUILD_DIR = path.resolve(__dirname, "..", "dist", "server");
 var APP_DIR = path.resolve(__dirname, "..", "src");
 
 //La configuration Webpack côté serveur ne gérera que l'arbre de dépendance javascript
 //Les arbres de dépendances des ressources (css, html, images...) seront gérés par la configuration client
 //pour éviter une double gestion des ressources côté serveur et client.
+//Cependant, Webpack se base sur l'arbre des requires pour injecter les liens dans le code javascript
+//vers les bonnes ressources required. Il faut donc quand même gérer les ressources côté serveur.
+//En output, on aura deux dossiers (client et serveur), le fichier js côté serveur se chargera
+//via Express de loader les assets depuis le dossier client.
 //Le template html serveur se charge de loader les ressources clients bundlées.
 var loaders = [{
 	test: /\.js[x]?$/,
@@ -37,7 +41,7 @@ var loaders = [{
 //Configuration Webpack pour générer un bundle qui sera utilisé par le serveur définit
 //dans /bin/server/serverSideRendering.js:
 var webpackConfig = [{
-	name: "client",
+	name: "client-webpack",
 	/*entry: {
 		APP_DIR + "/client"
 	},*/
@@ -66,7 +70,7 @@ var webpackConfig = [{
 		new ExtractTextPlugin("[name].css")
 	]
 }, {
-	name: "server",
+	name: "server-webpack",
 	entry: {
 		"server.bundle": APP_DIR + "/server"
 	},

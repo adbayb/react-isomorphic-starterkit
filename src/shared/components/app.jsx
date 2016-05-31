@@ -31,7 +31,4 @@ App.propTypes = {
 	children: React.PropTypes.element.isRequired
 };
 
-//render par défaut sans react-router:
-//render(<App/>, document.getElementById("app"));
-
 export default App;

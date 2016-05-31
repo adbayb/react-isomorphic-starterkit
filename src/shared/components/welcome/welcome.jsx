@@ -1,6 +1,6 @@
 import React from "react";
 
-class WelcomeComponent extends React.Component {
+class Welcome extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -14,8 +14,8 @@ class WelcomeComponent extends React.Component {
 	}
 }
 
-WelcomeComponent.propTypes = {
+Welcome.propTypes = {
 	params: React.PropTypes.object
 };
 
-export default WelcomeComponent;
+export default Welcome;

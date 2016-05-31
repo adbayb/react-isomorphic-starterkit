@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./example.css";
 
-class ExampleComponent extends React.Component {
+class Example extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -26,4 +26,4 @@ class ExampleComponent extends React.Component {
 	}
 }
 
-export default ExampleComponent;
+export default Example;

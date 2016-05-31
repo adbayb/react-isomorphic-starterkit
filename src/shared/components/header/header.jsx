@@ -1,18 +1,17 @@
 import React from "react";
 import styles from "./header.scss";
 
-class HeaderComponent extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+//Stateless component:
+const Header = props => {
+	return (
+		<header className={styles.header}>
+			<p className={styles.text}> {props.text} </p>
+		</header>
+	);
+};
 
-	render() {
-		return(
-			<header className={styles.header}>
-				<p className={styles.text}> I'm the Header and I'm cool :) </p>
-			</header>
-		);
-	}
-}
+Header.propTypes = {
+	text: React.PropTypes.string.isRequired
+};
 
-export default HeaderComponent;
+export default Header;

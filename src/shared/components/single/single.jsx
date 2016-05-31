@@ -1,7 +1,7 @@
 import React from "react";
 
 //Stateless component:
-const SingleComponent = props => {
+const Single = props => {
 	return(
 		<div className="container">
 			{props.children}
@@ -9,8 +9,8 @@ const SingleComponent = props => {
 	);
 };
 
-SingleComponent.propTypes = {
+Single.propTypes = {
 	children: React.PropTypes.element.isRequired
 };
 
-export default SingleComponent;
+export default Single;

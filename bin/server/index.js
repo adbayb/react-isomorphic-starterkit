@@ -1,7 +1,7 @@
 var express = require("express");
 var compress = require("compression");
 var path = require("path");
-var serverSideRendering = require("../../dist/server.bundle.js");
+var serverSideRendering = require("../../dist/server/server.bundle.js");
 //console.log(serverSideRendering);
 var server = express();
 
@@ -17,7 +17,7 @@ const port = process.env.PORT || 8080;
 server.use(compress({ threshold: 0 }));
 //On définit le répertoire contenant les fichiers statiques (images, css ...)
 //pour que ces derniers soient résolues par /ressource.ext au lieu de /public/ressource.ext:
-server.use(express.static(path.resolve(__dirname, "..", "..", "dist", "public")));
+server.use(express.static(path.resolve(__dirname, "..", "..", "dist", "client")));
 //On appelle (montage) la fonction middleware définie dans /src/components/server.jsx
 //à chaque requêtage serveur/client via la fonction server.use.
 //En spécifiant un path (par exemple server.use("/admin", function...)), le middleware

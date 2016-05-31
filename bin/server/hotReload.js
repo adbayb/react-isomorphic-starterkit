@@ -1,9 +1,9 @@
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
-var devConfig = require("../../config/webpack.dev");
+var webpackConfig = require("../../config/webpack.dev");
 
-new WebpackDevServer(webpack(devConfig), {
-	publicPath: devConfig.output.publicPath,
+new WebpackDevServer(webpack(webpackConfig), {
+	publicPath: webpackConfig.output.publicPath,
 	hot: true,
 	historyApiFallback: true
 }).listen(8080, "localhost", function(err) {

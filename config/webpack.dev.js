@@ -3,6 +3,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 //path permet de résoudre les chemins relatifs en absolus via __dirname et path.resolve notamment:
 var path = require("path");
 
+//cf. https://github.com/webpack/docs/issues/45 Inutile webpack hot loader côté serveur !
 var BUILD_DIR = path.resolve(__dirname, "..", "public");
 var APP_DIR = path.resolve(__dirname, "..", "src");
 var webpackConfig = {

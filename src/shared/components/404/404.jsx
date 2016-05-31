@@ -1,6 +1,6 @@
 import React from "react";
 
-class NotFoundComponent extends React.Component {
+class NotFound extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -16,4 +16,4 @@ class NotFoundComponent extends React.Component {
 	}
 }
 
-export default NotFoundComponent;
+export default NotFound;
