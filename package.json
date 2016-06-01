@@ -10,6 +10,7 @@
 		"watch": "node ./bin/server/hotReload.js",
 		"build": "npm run clean && webpack -p --progress --colors --config ./config/webpack.prod.js",
 		"deploy": "npm run build && npm run server",
+		"test": "npm run clean && webpack -p --progress --colors --config ./config/webpack.server.js && concurrently \"node ./config/webpack.dev.js\" \"npm run server\"",
 		"//webpack:dev:watch": "webpack -d --watch --colors --config ./config/webpack.dev.js",
 		"//webpack:dev:build": "webpack -d --colors --config ./config/webpack.dev.js"
 	},

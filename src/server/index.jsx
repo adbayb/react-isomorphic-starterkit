@@ -13,13 +13,15 @@ function renderHTML(componentHTML) {
 	<head>
 		<meta charset="UTF-8">
 		<title>React Starter kit (Webpack, react-router)</title>
-		<link rel="stylesheet" href="/client.bundle.css">
+		<!--<link rel="stylesheet" href="/client.bundle.css">-->
+		<!--<link rel="stylesheet" href="http://localhost:8081/client.bundle.css">-->
 	</head>
 
 	<body>
 		<div id="app">${componentHTML}</div>
 
-		<script src="/client.bundle.js"></script>
+		<!--<script src="/client.bundle.js"></script>-->
+		<script src="http://localhost:8081/client.bundle.js"></script>
 	</body>
 
 </html>`;
