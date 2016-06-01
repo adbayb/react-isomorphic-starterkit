@@ -4,13 +4,14 @@
 	"description": "A React.js isomorphic template with Webpack and react-router",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"postinstall": "npm run prod:deploy",
+		"postinstall": "npm run deploy",
 		"clean": "node ./bin/clean.js",
 		"server": "node ./bin/server",
 		"watch": "node ./bin/server/hotReload.js",
 		"build": "npm run clean && webpack -p --progress --colors --config ./config/webpack.prod.js",
 		"deploy": "npm run build && npm run server",
-		"test": "npm run clean && webpack -p --progress --colors --config ./config/webpack.server.js && concurrently \"node ./config/webpack.dev.js\" \"npm run server\"",
+		"test": "npm run clean && webpack -p --progress --colors --config ./config/webpack.server.js && npm run server",
+		"test2": "node ./config/webpack.dev.js",
 		"//webpack:dev:watch": "webpack -d --watch --colors --config ./config/webpack.dev.js",
 		"//webpack:dev:build": "webpack -d --colors --config ./config/webpack.dev.js"
 	},
