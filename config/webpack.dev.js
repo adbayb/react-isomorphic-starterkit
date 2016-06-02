@@ -42,6 +42,7 @@ var loaders = [{
 	loader: "file-loader?name=[name].[ext]"
 }];
 
+//Il faut savoir que le bundle sous HMR est stocké in-memory (en RAM) pour accélérer les mises à jours:
 exports.client = Object.assign({}, config.client, {
 	name: "dev-client",
 	entry: [

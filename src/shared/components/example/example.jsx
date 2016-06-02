@@ -17,7 +17,7 @@ class Example extends React.Component {
 	render() {
 		return (
 			<div>
-				<p className={styles.text}> I"m the example Component and I"m lazy </p>
+				<p className={styles.text}> I'm the example Component and I"m lazy </p>
 				<img src={require("./img/react.png")} className={styles.logo}/>
 
 				<button onClick={this.onClick.bind(this)}> Click Me </button>
