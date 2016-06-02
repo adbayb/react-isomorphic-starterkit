@@ -3,17 +3,13 @@
 	"version": "1.0.0",
 	"description": "A React.js isomorphic template with Webpack and react-router",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"postinstall": "npm run deploy",
 		"clean": "node ./bin/clean.js",
 		"server": "node ./bin/server",
 		"watch": "node ./bin/server/hotReload.js",
 		"build": "npm run clean && webpack -p --progress --colors --config ./config/webpack.prod.js",
 		"deploy": "npm run build && npm run server",
-		"test": "npm run clean && webpack -p --progress --colors --config ./config/webpack.server.js && npm run server",
-		"test2": "node ./config/webpack.dev.js",
-		"//webpack:dev:watch": "webpack -d --watch --colors --config ./config/webpack.dev.js",
-		"//webpack:dev:build": "webpack -d --colors --config ./config/webpack.dev.js"
+		"test": "npm run clean && webpack -p --progress --colors --config ./config/webpack.server.js && concurrent \"node ./bin/server/hotReload.js\" \"node ./bin/server\" --kill-others"
 	},
 	"repository": {
 		"type": "git",
@@ -48,6 +44,7 @@
 		"file-loader": "^0.8.5",
 		"fs": "0.0.2",
 		"node-sass": "^3.7.0",
+		"nodemon": "^1.9.2",
 		"react-hot-loader": "^1.3.0",
 		"sass-loader": "^3.2.0",
 		"style-loader": "^0.13.1",

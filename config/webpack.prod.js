@@ -1,4 +1,4 @@
 //var webpack = require("webpack");
-var webpackConfig = require("./webpack.shared.js");
+var config = require("./webpack.shared.js");
 
-module.exports = [webpackConfig.client, webpackConfig.server];
+module.exports = [config.client, config.server];

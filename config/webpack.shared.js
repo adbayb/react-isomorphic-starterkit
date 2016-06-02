@@ -6,7 +6,7 @@ var path = require("path");
 
 var CLIENT_BUILD_DIR = path.resolve(__dirname, "..", "dist", "client");
 var SERVER_BUILD_DIR = path.resolve(__dirname, "..", "dist", "server");
-var APP_DIR = path.resolve(__dirname, "..", "src");
+exports.APP_DIR = path.resolve(__dirname, "..", "src");
 
 //La configuration Webpack côté serveur ne gérera que l'arbre de dépendance javascript
 //Les arbres de dépendances des ressources (css, html, images...) seront gérés par la configuration client
@@ -18,7 +18,7 @@ var APP_DIR = path.resolve(__dirname, "..", "src");
 //Le template html serveur se charge de loader les ressources clients bundlées.
 var loaders = [{
 	test: /\.js[x]?$/,
-	include: APP_DIR,
+	include: exports.APP_DIR,
 	loader: "babel-loader",
 	query: {
 		presets: ["es2015", "react"]
@@ -43,13 +43,13 @@ var loaders = [{
 //Configuration Webpack pour générer un bundle qui sera utilisé par le serveur définit
 //dans /bin/server/serverSideRendering.js:
 exports.client = {
-	name: "client-webpack",
+	name: "client",
 	//Par défaut, Webpack set l'environnement cible à "web":
 	target: "web",
 	/*entry: {
 		APP_DIR + "/client"
 	},*/
-	entry: APP_DIR + "/client",
+	entry: exports.APP_DIR + "/client",
 	output: {
 		filename: "client.bundle.js",
 		path: CLIENT_BUILD_DIR,
@@ -67,7 +67,7 @@ exports.client = {
 };
 
 exports.server = {
-	name: "server-webpack",
+	name: "server",
 	//target permet de spécifier le type de compilation réalisé suivant l"environnement de destination.
 	//ici nous le settons à node car compilation pour un usage serveur (et donc node.js like environnement).
 	//Cela permet d"alléger notre js de sortie en n"incluant pas les modules node.js natifs dans le
@@ -97,7 +97,7 @@ exports.server = {
 		//on devra spécifier sur chaque fichier de sortie, le nom du fichier à affecter
 		//En spécifiant le nom chunk, on peut récupérer son nom via [name] et
 		//l'affecter à chaque fichier de sortie en les ditinguant par leur extension:
-		"server.bundle": APP_DIR + "/server"
+		"server.bundle": exports.APP_DIR + "/server"
 		//Possibilité de définir N entrées donc N sorties possibles
 		//partageant la même configuration de bundling:
 		//"test": APP_DIR + "/server"
