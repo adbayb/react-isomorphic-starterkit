@@ -11,7 +11,11 @@ compiler.apply(new ProgressPlugin(function(percentage, log) {
 	//process.stdout.write permet d'écrire directement sur la console nativement sans console.log
 	//Le fin de caractère \r permet déplacer la future ligne sur la première colonne écrasant donc l'ancienne ligne
 	//cela permet de logguer sur une ligne:
-	process.stdout.write(Math.floor(percentage * 100) + "% " + log + "\r");
+	//process.stdout.write(Math.floor(percentage * 100) + "% " + log + "\r");
+	//Mais la ligne précédente réécrit sur la ligne sans effacer les précédents caractères, cette solution permet d'y remedier:
+	process.stdout.clearLine();//Nettoyage du buffer console
+	process.stdout.cursorTo(0);//Reset du curseur à la première colonne
+	process.stdout.write(Math.floor(percentage * 100) + "% " + log);//Ecriture dans le flux de sortie (console)
 }));
 //On lance le processus de bundling via l'api webpack run:
 //L'équivalent en ligne de commande: webpack -p --progress --colors --config ./config/webpack.prod.js
