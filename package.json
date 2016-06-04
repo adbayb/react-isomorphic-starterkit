@@ -6,10 +6,9 @@
 		"postinstall": "npm run deploy",
 		"clean": "node ./bin/clean.js",
 		"server": "node ./bin/server",
-		"watch": "node ./bin/server/hotReload.js",
-		"build": "npm run clean && webpack -p --progress --colors --config ./config/webpack.prod.js",
+		"build": "npm run clean && node ./bin/bundler/prod.js",
 		"deploy": "npm run build && npm run server",
-		"test": "npm run clean && webpack -d --config ./config/webpack.dev.server.js && concurrent \"node ./bin/server/hotReload.js\" \"nodemon ./bin/server --watch dist -e js\" --kill-others"
+		"watch": "npm run clean && node ./bin/bundler/dev.js && concurrent \"node ./bin/server/hotReload.js\" \"nodemon ./bin/server --watch dist -e js\" --kill-others"
 	},
 	"repository": {
 		"type": "git",

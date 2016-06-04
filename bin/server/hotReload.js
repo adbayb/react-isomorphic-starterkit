@@ -1,8 +1,8 @@
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
-var config = require("../../config/webpack.dev.js");
+var configClient = require("../../config/webpack.dev.client.js");
+var configServer = require("../../config/webpack.dev.server.js");
 
-//Options affichage logs console Webpack:
 var options = {
 	chunk: false,
 	chunkModules: false,
@@ -11,15 +11,17 @@ var options = {
 	chunkOrigins: false
 };
 
-//cf. https://webpack.github.io/docs/node.js-api.html
-var serverCompiler = webpack(config.server);
-//Lancement du bundler via l'api :
-/*serverCompiler.run(function(err, stats) {
+//Gestion du bundle client + Hot Module Replacement via config.client:
+new WebpackDevServer(webpack(configClient), {
+	hot: true,
+	historyApiFallback: true,
+	stats: options
+}).listen(8081, "localhost", function(err) {
 	if(err)
-		return console.error(err.message);
+		console.log(err);
 
-	console.log(stats.toString(options));
-});*/
+	console.log("Webpack Server launched with at localhost:8081 (Hot Module Replacement [HMR] enabled)");
+});
 
 /*
 Pour éviter les erreurs du type:
@@ -36,21 +38,9 @@ Pour cela on utilise le principe de watcher sous webpack (afin de re-bundler (ou
 automatiquement à chaque mise à jour des fichiers de l'arbre spécifié à partir d'entry de config.server).
 Ensuite, on utilise le démon nodemon pour redémarrer notre serveur node à chaque mise à jour du /dist/server.bundle.js:
 */
-serverCompiler.watch({}, function(err, stats) {
+webpack(configServer).watch({}, function(err, stats) {
 	if(err)
 		return console.error(err.message);
 
 	console.log(stats.toString(options));
-});
-
-//Gestion du bundle client + Hot Module Replacement via config.client:
-new WebpackDevServer(webpack(config.client), {
-	hot: true,
-	historyApiFallback: true,
-	stats: options
-}).listen(8081, "localhost", function(err) {
-	if(err) {
-		console.log(err);
-	}
-	console.log("Webpack Server launched with at localhost:8081 (Hot Module Replacement [HMR] enabled)");
 });

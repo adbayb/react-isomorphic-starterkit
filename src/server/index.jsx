@@ -5,22 +5,41 @@ import { match, RouterContext } from "react-router";
 //configurée par défaut dans les configs webpack:
 import routes from "../shared/routes.jsx";
 
+//renderHtml est une Closure (i.e. fonction non pure) car dépendant d'une variable
+//extérieure (process.env.NODE_ENV qui est globale et fournie par Webpack et node):
 function renderHTML(componentHTML) {
-	//ES2015 template string:
-	return `<!DOCTYPE html>
+	//Suivant si on est en production ou non, on chargera les
+	//assets différemment (pour permettre notamment le hot reload en dev):
+	if(process.env.NODE_ENV === "production")
+		//ES2015 template string:
+		return `<!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="UTF-8">
-		<title>React Starter kit (Webpack, react-router)</title>
-		<!--<link rel="stylesheet" href="/client.bundle.css">-->
-		<!--<link rel="stylesheet" href="http://localhost:8081/client.bundle.css">-->
+		<title>React Isomorphic Starter Kit</title>
+		<link rel="stylesheet" href="/client.bundle.css">
 	</head>
 
 	<body>
 		<div id="app">${componentHTML}</div>
 
-		<!--<script src="/client.bundle.js"></script>-->
+		<script src="/client.bundle.js"></script>
+	</body>
+
+</html>`;
+	else
+		return `<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>React Isomorphic Starter Kit</title>
+	</head>
+
+	<body>
+		<div id="app">${componentHTML}</div>
+
 		<script src="http://localhost:8081/client.bundle.js"></script>
 	</body>
 
