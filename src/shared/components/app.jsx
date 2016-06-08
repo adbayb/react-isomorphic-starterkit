@@ -1,10 +1,27 @@
 import React from "react";
 import { Link } from "react-router";
+import Header from "./header/header.jsx";
+import Footer from "./footer/footer.jsx";
+import "./app.scss";
 
 let styles = {
-	color: "white",
-	backgroundColor: "red",
-	minHeight: 100
+	link: {
+		display: "block",
+		position: "absolute",
+		top: "35vh",
+		left: "1.5em",
+		color: "black",
+		backgroundColor: "lightgrey",
+		fontSize: "1.5em",
+		textDecoration: "none",
+		border: "1px solid black"
+	},
+	footer: {
+		color: "white",
+		fontSize: "2vmin",
+		fontWeight: "bold",
+		textAlign: "center"
+	}
 };
 
 class App extends React.Component {
@@ -12,16 +29,23 @@ class App extends React.Component {
 		//console.log(this.props.children);
 		return(
 			<div>
-				<div style={styles}>
-					<h1> React template with Webpack, react-router and react-hot-loader </h1>
-				</div>
+				<Header>
+					Isomorphic React Starter Kit v2.0
+				</Header>
 
 				{/*Rendu des composants des routes enfants*/}
 				{this.props.children}
 
-				<div>
-					<Link to="/">Go back</Link>
-				</div>
+				<Link to="/" style={styles.link}>Go back</Link>
+
+				<Footer>
+					<p style={styles.footer}>
+						Feel free to use it and share it
+					</p>
+					<p style={styles.footer}>
+						Ayoub ADIB (twitter: ayoubdeveloper)
+					</p>
+				</Footer>
 			</div>
 		);
 	}
