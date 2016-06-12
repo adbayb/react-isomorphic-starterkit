@@ -42,9 +42,9 @@ class App extends React.Component {
 					<p style={styles.footer}>
 						Feel free to use it and share it
 					</p>
-					<p style={styles.footer}>
-						Ayoub ADIB (twitter: ayoubdeveloper)
-					</p>
+					<p style={styles.footer}>Ayoub ADIB</p>
+					<p style={styles.footer}>Twitter: <a href="https://twitter.com/ayoubdeveloper">ayoubdeveloper</a></p>
+					<p style={styles.footer}>Github: <a href="https://github.com/ayoubdev">https://github.com/ayoubdev</a></p>
 				</Footer>
 			</div>
 		);

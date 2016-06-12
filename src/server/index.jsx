@@ -4,6 +4,7 @@ import { match, RouterContext } from "react-router";
 //on peut ne pas spécifier l"extension jsx dans l"import car extension
 //configurée par défaut dans les configs webpack:
 import routes from "../shared/routes.jsx";
+import "../shared/favicon.ico";
 
 //renderHtml est une Closure (i.e. fonction non pure) car dépendant d'une variable
 //extérieure (process.env.NODE_ENV qui est globale et fournie par Webpack et node):

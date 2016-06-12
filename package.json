@@ -1,7 +1,7 @@
 {
 	"name": "reactjs-isomorphic-starterkit",
-	"version": "1.0.0",
-	"description": "A React.js isomorphic template with Webpack and react-router",
+	"version": "2.0.0",
+	"description": "An isomorphic React boilerplate with Webpack (SASS/CSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification.",
 	"scripts": {
 		"postinstall": "npm run deploy",
 		"clean": "node ./bin/clean.js",
