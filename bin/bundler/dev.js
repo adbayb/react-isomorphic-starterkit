@@ -10,6 +10,7 @@ var options = {
 };
 
 var compiler = webpack(config);
+
 compiler.run(function(err, stats) {
 	if(err)
 		return console.error(err.message);
