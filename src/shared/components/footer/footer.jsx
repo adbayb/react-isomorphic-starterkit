@@ -10,7 +10,6 @@ const Footer = (props) => {
 };
 
 Footer.propTypes = {
-	//node = nombre, string, element ou un tableau contenant ces types:
 	children: React.PropTypes.node.isRequired
 };
 

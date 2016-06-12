@@ -1,18 +1,11 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { match, RouterContext } from "react-router";
-//on peut ne pas spécifier l"extension jsx dans l"import car extension
-//configurée par défaut dans les configs webpack:
 import routes from "../shared/routes.jsx";
 import "../shared/favicon.ico";
 
-//renderHtml est une Closure (i.e. fonction non pure) car dépendant d'une variable
-//extérieure (process.env.NODE_ENV qui est globale et fournie par Webpack et node):
 function renderHTML(componentHTML) {
-	//Suivant si on est en production ou non, on chargera les
-	//assets différemment (pour permettre notamment le hot reload en dev):
 	if(process.env.NODE_ENV === "production")
-		//ES2015 template string:
 		return `<!DOCTYPE html>
 <html>
 
@@ -47,15 +40,8 @@ function renderHTML(componentHTML) {
 </html>`;
 }
 
-//Définition de la fonction middleware qui sera utilisé par express à chaque requête client/serveur:
-//Elle permet de gérer les redirections en réponse via react-router
-//Pour plus de détails: cf. https://github.com/reactjs/react-router/blob/master/docs/guides/ServerRendering.md :
 export default function(req, res) {
 	console.log(req.url);
-	/*
-	if(req.url.indexOf(".ico") !== -1)
-		console.log("ICO file");
-	*/
 	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 		if(error) {
 			res.status(500).send(error.message);

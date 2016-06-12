@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./header.scss";
 
-//Stateless component:
 const Header = props => {
 	return(
 		<header className={styles.header}>

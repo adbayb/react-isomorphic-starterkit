@@ -1,6 +1,5 @@
 import React from "react";
 
-//Stateless component:
 const Single = props => {
 	return(
 		<div className="container">

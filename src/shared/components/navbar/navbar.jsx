@@ -3,7 +3,6 @@ import { Link } from "react-router";
 
 class Navbar extends React.Component {
 	render() {
-		//console.log(this.props.children);
 		return(
 			<nav>
 				<ul>

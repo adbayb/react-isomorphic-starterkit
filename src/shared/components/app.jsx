@@ -26,16 +26,13 @@ let styles = {
 
 class App extends React.Component {
 	render() {
-		//console.log(this.props.children);
 		return(
 			<div>
 				<Header>
 					Isomorphic React Starter Kit v2.0
 				</Header>
 
-				{/*Rendu des composants des routes enfants*/}
 				{this.props.children}
-
 				<Link to="/" style={styles.link}>Go back</Link>
 
 				<Footer>
