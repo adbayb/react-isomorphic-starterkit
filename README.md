@@ -1,6 +1,9 @@
 # React Isomorphic Starter Kit
 
-An isomorphic React boilerplate with Webpack (SASS/CSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification. <br/>Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). <br/> All necessary tools are set up to start up quickly your React project !
+An isomorphic React boilerplate with Webpack (SASS/CSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification. 
+<br/> Thanks to isomorphism, you can display your React app server side and simply display that rendered string to users when they first visit the page: Performance and SEO friendly !
+<br/> Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). 
+<br/> All necessary tools are set up to start up quickly your React project !
 
 <br/>
 ## Getting Started
