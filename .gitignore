@@ -37,5 +37,4 @@ node_modules
 *.iml
 
 # Misc
-public
 dist
