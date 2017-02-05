@@ -1,56 +1,37 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { match, RouterContext } from "react-router";
-import routes from "../shared/routes.jsx";
-import "../shared/favicon.ico";
+import { match } from "react-router";
+import ErrorLayout from "components/errorLayout/ErrorLayout";
+import Routes from "containers/routes/Routes";
+import Server from "./Server";
 
-function renderHTML(componentHTML) {
-	if(process.env.NODE_ENV === "production")
-		return `<!DOCTYPE html>
-<html>
-
-	<head>
-		<meta charset="UTF-8">
-		<title>React Isomorphic Starter Kit</title>
-		<link rel="stylesheet" href="/client.bundle.css">
-	</head>
-
-	<body>
-		<div id="app">${componentHTML}</div>
-
-		<script src="/client.bundle.js"></script>
-	</body>
-
-</html>`;
-	else
-		return `<!DOCTYPE html>
-<html>
-
-	<head>
-		<meta charset="UTF-8">
-		<title>React Isomorphic Starter Kit</title>
-	</head>
-
-	<body>
-		<div id="app">${componentHTML}</div>
-
-		<script src="http://localhost:8081/client.bundle.js"></script>
-	</body>
-
-</html>`;
-}
-
-export default function(req, res) {
-	console.log(req.url);
-	match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-		if(error) {
-			res.status(500).send(error.message);
-		} else if(redirectLocation) {
-			res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-		} else if(renderProps) {
-			res.status(200).send(renderHTML(renderToString(<RouterContext {...renderProps} />)));
+export default (location, onSuccess, onError, onRedirect) => {
+	return match({ routes: Routes, location }, (error, redirectLocation, renderProps) => {
+		if (error) {
+			console.log(error);
+			return onError(500, "Internal Server Error");
+		} else if (redirectLocation) {
+			return onRedirect(redirectLocation.pathname + redirectLocation.search);
+		} else if (renderProps) {
+			try {
+				return onSuccess(
+					renderToString(<Server renderProps={renderProps} />)
+				);
+			} catch (err) {
+				onError(
+					500,
+					renderToString(
+						<ErrorLayout
+							stack={err.stack || err.toString()}
+							name={err.name}
+							message={err.message}
+							statusCode={500}
+						/>
+					)
+				);
+			}
 		} else {
-			res.status(404).send("Not found");
+			onError(404, "Not found");
 		}
 	});
-}
+};

@@ -1,0 +1,22 @@
+{
+	"presets": [
+		[
+			"latest",
+			{
+				// Disable babel modules commonjs in order to
+				// delegate it to webpack2 for tree shaking feature:
+				"es2015": {
+					"modules": false
+				}
+			}
+		],
+		"react"
+	],
+	"plugins": [
+		// The order is important: 
+		"transform-class-properties",
+		"transform-object-rest-spread",
+		// HMR:
+		"react-hot-loader/babel"
+	]
+}

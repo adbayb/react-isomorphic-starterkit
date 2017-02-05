@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./example.css";
+import styles from "./Example.css";
 
 class Example extends React.Component {
 	constructor(props) {
@@ -15,10 +15,10 @@ class Example extends React.Component {
 	}
 
 	render() {
-		return(
+		return (
 			<div>
 				<p className={styles.text}> Example Component: </p>
-				<img src={require("./img/react.png")} className={styles.logo}/>
+				<img src={require("./img/react.png")} className={styles.logo} />
 
 				<button onClick={this.onClick.bind(this)}> Click Me </button>
 			</div>

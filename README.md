@@ -1,13 +1,13 @@
 # React Isomorphic Starter Kit
 
-An isomorphic React boilerplate with Webpack (SASS/CSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification. <br/>Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). <br/> All necessary tools are set up to start up quickly your React project !
+An isomorphic React boilerplate with Webpack (SASS/CSS loader, PostCSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification. <br/>Become more productive and Enable shared javascript that runs on both client and server (client side + server side rendering)). <br/> All necessary tools are set up to start up quickly your React project !
 
 <br/>
 ## Getting Started
 
 To begin with this starter kit project, simply follow these steps:
 
-- [x] Clone repository: `git clone https://github.com/ayoubdev/reactjs-isomorphic-starterkit.git`
+- [x] Clone repository: `git clone https://github.com/aybadb/react-isomorphic-starterkit.git`
 - [x] Go to cloned directory and feel free to modify `package.json` information (like project name, description...):
 - [x] Run this cli command: `npm install`
 - [x] Open this URL and enjoy: `http://localhost:8080/`
@@ -21,7 +21,7 @@ To begin with this starter kit project, simply follow these steps:
 
 #### For development:
 
-> **npm run watch** <br/>Bundle and Track changes in client and server side ressources (via Hot Module Replacement [HMR]) <br/>
+> **npm run watch** (or alias npm start) <br/>Bundle and Track changes in client and server side ressources (via Hot Module Replacement [HMR]) <br/>
 
 #### For production:
 
@@ -31,6 +31,15 @@ To begin with this starter kit project, simply follow these steps:
 #### Misc commands:
 
 > **npm run clean** <br/>Delete bundler outputs (./dist folder) <br/>
+
+<br/>
+## TODO
+
+- [x] Unit testing setup
+- [x] Fetch data from components server side
+- [x] Async/Await api 
+- [x] Rename repository from reactjs-* to react-*
+- [x] eslint custom configurations
 
 <br/>
 ## License

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router";
-import Header from "./header/header.jsx";
-import Footer from "./footer/footer.jsx";
-import "./app.scss";
+import Header from "components/header/Header";
+import Footer from "components/footer/Footer";
+// Import css from public folder to allow webpack post processing:
+import "public/styles/core.css";
 
 let styles = {
 	link: {
@@ -26,10 +27,10 @@ let styles = {
 
 class App extends React.Component {
 	render() {
-		return(
+		return (
 			<div>
 				<Header>
-					Isomorphic React Starter Kit v2.0
+					Isomorphic React Starter Kit v3.0
 				</Header>
 
 				{this.props.children}
@@ -41,7 +42,7 @@ class App extends React.Component {
 					</p>
 					<p style={styles.footer}>Ayoub ADIB</p>
 					<p style={styles.footer}>Twitter: <a href="https://twitter.com/aybadb">aybadb</a></p>
-					<p style={styles.footer}>Github: <a href="https://github.com/ayoubdev">https://github.com/ayoubdev</a></p>
+					<p style={styles.footer}>Github: <a href="https://github.com/aybadb">https://github.com/aybadb</a></p>
 				</Footer>
 			</div>
 		);

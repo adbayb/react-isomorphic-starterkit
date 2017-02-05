@@ -1,8 +1,9 @@
 import React from "react";
-import styles from "./header.scss";
+// postcss-cssnext test:
+import styles from "./Header.css";
 
 const Header = props => {
-	return(
+	return (
 		<header className={styles.header}>
 			<p className={styles.text}>
 				{props.children}

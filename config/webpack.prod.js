@@ -1,67 +1,70 @@
-var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var shared = require("./webpack.shared.js");
+const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const {
+	WEBPACK_BUILD_DIR,
+	CLIENT_APP_DIR,
+	SERVER_APP_DIR,
+	SERVER_BUILD_DIR,
+	CLIENT_BUILD_DIR,
+	getRules,
+	resolve,
+	env,
+	vendor,
+	plugins
+} = require("./webpack.shared.js");
+const AssetsPlugin = require("assets-webpack-plugin");
 
-var loaders = [{
-	test: /\.js[x]?$/,
-	include: shared.APP_DIR,
-	loader: "babel-loader",
-	query: {
-		presets: ["es2015", "react"]
-	}
-}, {
-	test: /\.css$/,
-	loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]")
-}, {
-	test: /\.scss$/,
-	loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules&localIdentName=[path]-[name]_[local]-[hash:base64:5]!sass-loader")
-}, {
-	test: /\.(jp[e]?g|png|gif|svg)$/i,
-	loader: "file-loader?name=img/[name].[ext]"
-}, {
-	test: /\.html$/,
-	loader: "file-loader?name=[name].[ext]"
-}, {
-	test: /\.ico$/,
-	loader: "file-loader?name=[name].[ext]"
-}];
+const commonPlugins = [
+	...plugins,
+	new webpack.optimize.UglifyJsPlugin({
+		compress: {
+			warnings: false
+		}
+	}),
+	new webpack.DefinePlugin(
+		Object.assign(
+			{},
+			env,
+			{
+				"process.env": {
+					NODE_ENV: JSON.stringify("production")
+				}
+			}
+		)
+	)
+];
 
-var client = {
+const client = {
 	name: "prod.client",
 	target: "web",
 	entry: {
-		"client.bundle": shared.APP_DIR + "/client"
+		app: `${CLIENT_APP_DIR}`,
+		vendor
 	},
 	output: {
-		filename: "[name].js",
-		path: shared.CLIENT_BUILD_DIR,
+		filename: "[name].[hash].js",
+		path: CLIENT_BUILD_DIR,
 		publicPath: "/"
 	},
 	module: {
-		loaders: loaders
+		rules: getRules()
 	},
-	resolve: {
-		extensions: ["", ".js", ".jsx"]
-	},
+	resolve,
 	plugins: [
-		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
+		...commonPlugins,
+		new ExtractTextPlugin("[name].[hash].css"),
+		new AssetsPlugin({
+			path: WEBPACK_BUILD_DIR,
+			filename: "manifest.json",
+			prettyPrint: true,
 		}),
-		new webpack.DefinePlugin({
-			"process.env": {
-				NODE_ENV: JSON.stringify("production")
-			}
-		}),
-
-		new ExtractTextPlugin("[name].css")
+		new webpack.optimize.CommonsChunkPlugin({
+			name: "vendor"
+		})
 	]
 };
 
-var server = {
+const server = {
 	name: "prod.server",
 	target: "node",
 	externals: [
@@ -70,35 +73,20 @@ var server = {
 		}
 	],
 	entry: {
-		"server.bundle": shared.APP_DIR + "/server"
+		app: `${SERVER_APP_DIR}`
 	},
 	output: {
 		filename: "[name].js",
-		path: shared.SERVER_BUILD_DIR,
-		publicPath: "/",
-		libraryTarget: "commonjs2"
+		path: SERVER_BUILD_DIR,
+		libraryTarget: "commonjs2",
+		publicPath: "/"
 	},
 	module: {
-		loaders: loaders
+		rules: getRules()
 	},
-	resolve: {
-		extensions: ["", ".js", ".jsx"]
-	},
+	resolve,
 	plugins: [
-		//Prod optimizations:
-		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		}),
-		new webpack.DefinePlugin({
-			"process.env": {
-				NODE_ENV: JSON.stringify("production")
-			}
-		}),
-
+		...commonPlugins,
 		new ExtractTextPlugin("[name].css")
 	]
 };
