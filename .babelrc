@@ -13,10 +13,22 @@
 		"react"
 	],
 	"plugins": [
-		// The order is important: 
+		// The order is important: transform-decorators-legacy always first
+		"transform-decorators-legacy",
 		"transform-class-properties",
 		"transform-object-rest-spread",
 		// HMR:
-		"react-hot-loader/babel"
+		"react-hot-loader/babel",
+		// babel-plugin-transform-runtime (cleaner than babel-polyfill)
+		// for async/await regenerator and some other > ES2015 polyfill
+		[
+			"transform-runtime",
+			{
+				"helpers": false,
+				"polyfill": false,
+				"regenerator": true,
+				"moduleName": "babel-runtime"
+			}
+		]
 	]
 }

@@ -16,17 +16,6 @@ const styles = {
 		lineHeight: 1.2,
 		whiteSpace: "pre-wrap"
 	},
-	button: {
-		height: "30px",
-		padding: "0 10px",
-		border: "2px solid rgb(230, 230, 230)",
-		borderRadius: "3px",
-		backgroundColor: "white",
-		color: "rgb(127, 127, 127)",
-		fontWeight: "normal",
-		fontSize: "14rem",
-		cursor: "pointer",
-	},
 	error: {
 		color: "#E36049"
 	},

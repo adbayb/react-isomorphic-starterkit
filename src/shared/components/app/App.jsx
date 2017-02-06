@@ -25,8 +25,33 @@ let styles = {
 	}
 };
 
+// Decorator test:
+const decorator = (target, key, descriptor) => {
+	const timer = "debug time:";
+	console.time(timer);
+	descriptor.value();
+	console.timeEnd(timer);
+	// console.log(target, key, descriptor);
+};
+
 class App extends React.Component {
+	@decorator
+	test() {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve("Async/Await working");
+			});
+		});
+
+	}
+
+	async testAsync() {
+		console.log(await this.test());
+	}
+
 	render() {
+		this.testAsync();
+
 		return (
 			<div>
 				<Header>

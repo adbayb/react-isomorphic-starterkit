@@ -85,7 +85,7 @@ export default class ErrorLayout extends Component {
 				<div style={styles.container}>
 					{this.renderStatusCode(statusCode)}
 
-					<div className={styles.button}>
+					<div>
 						{this.renderStack(stack)}
 						{this.renderHelpers(message)}
 					</div>
