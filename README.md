@@ -35,11 +35,12 @@ To begin with this starter kit project, simply follow these steps:
 <br/>
 ## TODO
 
-- [x] Unit testing setup (jest)
+- [ ] eslint custom configurations
+- [ ] Unit testing setup (jest)
 - [ ] Fetch data from components server side
 - [x] Async/Await api 
+- [x] Decorator support
 - [x] Rename repository from reactjs-* to react-*
-- [ ] eslint custom configurations
 
 <br/>
 ## License
