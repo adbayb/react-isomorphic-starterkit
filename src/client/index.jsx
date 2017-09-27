@@ -16,7 +16,7 @@ function mount() {
 		<HMRWrapper>
 			<Client routes={routes} />
 		</HMRWrapper>,
-		document.getElementById("app")
+		document.getElementById("root")
 	);
 }
 

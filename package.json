@@ -31,7 +31,7 @@
     "starterkit",
     "starter-kit"
   ],
-  "author": "Ayoub ADIB <ayoub.development@gmail.com>",
+  "author": "Ayoub ADIB <adbayb@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",

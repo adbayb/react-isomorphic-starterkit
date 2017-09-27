@@ -17,7 +17,7 @@ const renderHtml = (
   </head>
 
   <body>
-    <div id="app">${typeof body !== "undefined" ? body : ""}</div>
+    <div id="root">${typeof body !== "undefined" ? body : ""}</div>
 
     ${typeof scripts !== "undefined" ? scripts : ""}
   </body>

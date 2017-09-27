@@ -1,7 +1,6 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { match } from "react-router";
-import ErrorLayout from "components/errorLayout/ErrorLayout";
 import Routes from "containers/routes/Routes";
 import Server from "./Server";
 
@@ -21,12 +20,7 @@ export default (location, onSuccess, onError, onRedirect) => {
 				onError(
 					500,
 					renderToString(
-						<ErrorLayout
-							stack={err.stack || err.toString()}
-							name={err.name}
-							message={err.message}
-							statusCode={500}
-						/>
+						<div> An error occured </div>
 					)
 				);
 			}
