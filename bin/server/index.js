@@ -1,8 +1,8 @@
 const express = require("express");
 const compress = require("compression");
 const path = require("path");
-const connectHMR = require("./hmr.js");
-const { onSuccess, onRedirect, onError } = require("./lifecycle.js");
+const connectHMR = require("./connectHMR.js");
+const { onSuccess, onRedirect, onError } = require("./hooks.js");
 const { __DEV__, __PORT__ } = require("../../config/env.js");
 const { configClient } = require("../../config/webpack.dev.js");
 const appScript = require("../../dist/server/app.js");

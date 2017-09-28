@@ -1,14 +1,16 @@
-const webpack = require("webpack");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const env = require("./env.js");
-const postcss = require("./postcss.config.js");
+const postcssConfig = require("./postcss.js");
+
+const SRC_DIR = path.resolve(__dirname, "../src");
+const DIST_DIR = path.resolve(__dirname, "../dist");
 
 // cf. https://webpack.js.org/ for webpack2 documentation:
 // https://webpack.js.org/guides/migrating/
-const commonRules = [{
+const rules = [{
 	test: /\.js[x]?$/,
-	include: path.resolve(__dirname, "../src"),
+	include: SRC_DIR,
 	use: ["babel-loader"]
 }, {
 	test: /\.(jp[e]?g|png|gif|svg)$/i,
@@ -34,107 +36,87 @@ const commonRules = [{
 			name: "fonts/[name].[hash].[ext]"
 		}
 	}
+}, {
+	test: /\.css$/,
+	use: [{
+		loader: "css-loader",
+		options: {
+			modules: true,
+			minimize: true,
+			importLoaders: 1,
+			localIdentName: "[name]__[local]___[hash:base64:5]"
+		}
+	}, {
+		loader: "postcss-loader",
+		options: {
+			plugins: [
+				// postcss-cssnext already includes postcss-nested:
+				// same for autoprefixer
+				// see. http://cssnext.io/features/
+				require("postcss-cssnext")({
+					// autoprefixer browsers env:
+					browsers: ["> 1%", "last 2 versions"]
+				})
+			]
+		}
+	}]
 }];
 
-const hmrRules = [
-	...commonRules,
-	{
-		test: /\.css$/,
-		use: [{
-			loader: "style-loader"
-		}, {
-			loader: "css-loader",
-			options: {
-				modules: true,
-				minimize: true,
-				importLoaders: 1,
-				localIdentName: "[name]__[local]___[hash:base64:5]"
-			}
-		}, {
-			loader: "postcss-loader"
-		}]
-	},
-	{
-		test: /\.scss$/,
-		use: [{
-			loader: "style-loader"
-		}, {
-			loader: "css-loader",
-			options: {
-				modules: true,
-				minimize: true,
-				importLoaders: 1,
-				localIdentName: "[name]__[local]___[hash:base64:5]"
-			}
-		}, {
-			loader: "postcss-loader"
-		}, {
-			loader: "sass-loader"
-		}]
-	}
-];
+const cssRules = ({withFakeStyle, withFile}) => {
+	const loaders = [{
+		loader: "css-loader",
+		options: {
+			modules: true,
+			minimize: true,
+			importLoaders: 1,
+			localIdentName: "[name]__[local]___[hash:base64:5]"
+		}
+	}, {
+		loader: "postcss-loader",
+		options: postcssConfig
+	}];
 
-const rules = [
-	...commonRules,
-	{
-		test: /\.css$/,
-		// importLoaders to apply css loaders also for imported css (via @import statement):
-		// CSS Modules already managed by css-loader (via modules query):
-		// no needs for postcss-modules:
-		loader: ExtractTextPlugin.extract({
-			fallback: "style-loader",
-			use: [{
-				loader: "css-loader",
-				query: {
-					modules: true,
-					minimize: true,
-					importLoaders: 1,
-					localIdentName: "[name]__[local]___[hash:base64:5]"
-				}
-			}, {
-				loader: "postcss-loader"
-			}]
-		})
-	},
-	{
-		test: /\.scss$/,
-		loader: ExtractTextPlugin.extract({
-			fallback: "style-loader",
-			use: [{
-				loader: "css-loader",
-				query: {
-					modules: true,
-					minimize: true,
-					importLoaders: 1,
-					localIdentName: "[name]__[local]___[hash:base64:5]"
-				}
-			}, {
-				loader: "postcss-loader"
-			}, {
-				loader: "sass-loader"
-			}]
-		})
+	if (withFakeStyle) {
+		return {
+			test: /\.css$/,
+			use: loaders
+		}
 	}
-];
+
+	if (withFile) {
+		return {
+			test: /\.css$/,
+			// importLoaders to apply css loaders also for imported css (via @import statement):
+			// CSS Modules already managed by css-loader (via modules query):
+			// no needs for postcss-modules:
+			use: ExtractTextPlugin.extract({
+				fallback: "style-loader",
+				use: loaders
+			})
+		}
+	}
+
+	return {
+		test: /\.css$/,
+		use: [
+			{
+				loader: "style-loader"
+			},
+			...loaders
+		]
+	}
+}
 
 const resolve = {
 	alias: {
 		public: path.resolve(__dirname, "../public")
 	},
 	modules: [
-		path.resolve(__dirname, "../src"),
-		path.resolve(__dirname, "../src/shared"),
+		SRC_DIR,
+		path.join(SRC_DIR, "./shared"),
 		"node_modules"
 	],
 	extensions: [".js", ".jsx"]
-};
-
-const getRules = (isHMR) => {
-	if (isHMR) {
-		return hmrRules;
-	}
-
-	return rules;
 };
 
 const vendor = [
@@ -143,23 +125,14 @@ const vendor = [
 	"react-router"
 ];
 
-const plugins = [
-	new webpack.LoaderOptionsPlugin({
-		options: {
-			postcss
-		}
-	})
-];
-
 module.exports = {
 	env,
-	getRules,
 	resolve,
 	vendor,
-	plugins,
-	SERVER_APP_DIR: path.resolve(__dirname, "../src/server"),
-	CLIENT_APP_DIR: path.resolve(__dirname, "../src/client"),
-	SERVER_BUILD_DIR: path.resolve(__dirname, "../dist/server"),
-	CLIENT_BUILD_DIR: path.resolve(__dirname, "../dist/static"),
-	WEBPACK_BUILD_DIR: path.resolve(__dirname, "../dist/webpack")
+	rules,
+	SERVER_SRC_DIR: path.join(SRC_DIR, "./server"),
+	CLIENT_SRC_DIR: path.join(SRC_DIR, "./client"),
+	SERVER_BUILD_DIR: path.join(DIST_DIR, "./server"),
+	CLIENT_BUILD_DIR: path.resolve(DIST_DIR, "./static"),
+	WEBPACK_BUILD_DIR: path.resolve(DIST_DIR, "./webpack")
 };

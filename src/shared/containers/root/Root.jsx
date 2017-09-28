@@ -66,8 +66,8 @@ class App extends React.Component {
 						Feel free to use it and share it
 					</p>
 					<p style={styles.footer}>Ayoub ADIB</p>
-					<p style={styles.footer}>Twitter: <a href="https://twitter.com/aybadb">aybadb</a></p>
-					<p style={styles.footer}>Github: <a href="https://github.com/aybadb">https://github.com/aybadb</a></p>
+					<p style={styles.footer}>Twitter: <a href="https://twitter.com/adbayb">adbayb</a></p>
+					<p style={styles.footer}>Github: <a href="https://github.com/adbayb">https://github.com/adbayb</a></p>
 				</Footer>
 			</div>
 		);

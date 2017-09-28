@@ -2,20 +2,18 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const {
 	WEBPACK_BUILD_DIR,
-	CLIENT_APP_DIR,
-	SERVER_APP_DIR,
+	CLIENT_SRC_DIR,
+	SERVER_SRC_DIR,
 	SERVER_BUILD_DIR,
 	CLIENT_BUILD_DIR,
 	getRules,
 	resolve,
 	env,
-	vendor,
-	plugins
+	vendor
 } = require("./webpack.shared.js");
 const AssetsPlugin = require("assets-webpack-plugin");
 
 const commonPlugins = [
-	...plugins,
 	new webpack.optimize.UglifyJsPlugin({
 		compress: {
 			warnings: false
@@ -34,11 +32,11 @@ const commonPlugins = [
 	)
 ];
 
-const client = {
+const baseClient = {
 	name: "prod.client",
 	target: "web",
 	entry: {
-		app: `${CLIENT_APP_DIR}`,
+		app: `${CLIENT_SRC_DIR}`,
 		vendor
 	},
 	output: {
@@ -64,7 +62,7 @@ const client = {
 	]
 };
 
-const server = {
+const baseServer = {
 	name: "prod.server",
 	target: "node",
 	externals: [
@@ -73,7 +71,7 @@ const server = {
 		}
 	],
 	entry: {
-		app: `${SERVER_APP_DIR}`
+		app: `${SERVER_SRC_DIR}`
 	},
 	output: {
 		filename: "[name].js",
@@ -91,4 +89,4 @@ const server = {
 	]
 };
 
-module.exports = [client, server];
+module.exports = [baseClient, baseServer];

@@ -1,73 +1,59 @@
 const webpack = require("webpack");
+const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const {
-	CLIENT_APP_DIR,
-	SERVER_APP_DIR,
-	CLIENT_BUILD_DIR,
-	SERVER_BUILD_DIR,
-	resolve,
-	env,
-	getRules,
-	plugins
-} = require("./webpack.shared.js");
+const { baseClient, baseServer, cssLoaders } = require("./webpack/base.js");
 
-const client = {
-	name: "dev.client",
-	target: "web",
+const client = merge({
 	devtool: "eval-source-map",
+	output: {
+		filename: "[name].js"
+	},
 	entry: {
 		app: [
 			// cf. configuration React Hot Loader 3.X:
 			// https://github.com/gaearon/react-hot-loader/issues/243#issuecomment-211957140
 			"react-hot-loader/patch",
 			"webpack-hot-middleware/client",
-			`${CLIENT_APP_DIR}`
 		]
 	},
-	output: {
-		filename: "[name].js",
-		path: CLIENT_BUILD_DIR,
-		publicPath: "/hmr/"
-	},
 	module: {
-		rules: getRules(true)
+		rules: [{
+			test: /\.css$/,
+			use: [
+				{
+					loader: "style-loader"
+					// other css loaders (e.g. css-loader, postcss-loader)
+					// append from base config via merge.smart)
+				},
+				...cssLoaders
+			]
+		}]
 	},
-	resolve,
 	plugins: [
-		...plugins,
-		new webpack.DefinePlugin(env),
+		// new webpack.DefinePlugin(env),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin()
 	]
-};
+}, baseClient);
 
-const server = {
-	name: "dev.server",
-	target: "node",
-	externals: [
-		/^[a-z\-0-9]+$/, {
-			"react-dom/server": true
-		}
-	],
-	entry: {
-		app: `${SERVER_APP_DIR}`
-	},
+const server = merge({
 	output: {
-		filename: "[name].js",
-		path: SERVER_BUILD_DIR,
-		libraryTarget: "commonjs2",
-		publicPath: "/hmr/"
+		filename: "[name].js"
 	},
 	module: {
-		rules: getRules()
+		rules: [{
+			test: /\.css$/,
+			use: ExtractTextPlugin.extract({
+				fallback: "style-loader",
+				use: cssLoaders
+			})
+		}]
 	},
-	resolve,
 	plugins: [
-		...plugins,
-		new webpack.DefinePlugin(env),
+		// new webpack.DefinePlugin(env)
 		new ExtractTextPlugin("[name].css")
 	]
-};
+}, baseServer);
 
 module.exports = {
 	configClient: client,

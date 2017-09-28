@@ -1,6 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import { AppContainer as HMRWrapper } from "react-hot-loader";
 import Routes from "containers/routes/Routes";
 import Client from "./Client";
 
@@ -13,9 +12,7 @@ function mount() {
 	// When in production, AppContainer is automatically disabled,
 	// and simply returns its children (cf. https://github.com/gaearon/react-hot-loader/tree/next-docs/docs):
 	render(
-		<HMRWrapper>
-			<Client routes={routes} />
-		</HMRWrapper>,
+		<Client routes={routes} />,
 		document.getElementById("root")
 	);
 }

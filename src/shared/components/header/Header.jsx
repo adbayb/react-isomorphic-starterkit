@@ -1,5 +1,4 @@
 import React from "react";
-// postcss-cssnext test:
 import styles from "./Header.css";
 
 const Header = props => {
