@@ -40,7 +40,6 @@ server.use((req, res) => {
 	);
 });
 
-
 const listener = server.listen(port, () => {
 	const host = listener.address().address;
 

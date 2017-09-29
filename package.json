@@ -15,7 +15,7 @@
 		"deploy":
 			"npm run build:prod && cross-env NODE_ENV=production npm run server",
 		"watch": "npm run build:dev && npm run server",
-		"format": "prettier --write {bin,src,config}/**/*.{js,jsx}"
+		"format": "prettier --write **/*.{js,jsx,json,css}"
 	},
 	"repository": {
 		"type": "git",

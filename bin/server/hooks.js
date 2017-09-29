@@ -20,26 +20,23 @@ const getContextualAssets = (isProduction, { hmrPublicPath }) => {
 	};
 };
 
-const onError = (res) => (code, body) => {
-	return res
-		.status(code)
-		.send(body);
+const onError = res => (code, body) => {
+	return res.status(code).send(body);
 };
 
-const onSuccess = (res, isProduction, opts) => (body) => {
+const onSuccess = (res, isProduction, opts) => body => {
 	const locals = Object.assign(
-		{}, {
+		{},
+		{
 			body
 		},
 		getContextualAssets(isProduction, opts)
 	);
 
-	return res.status(200).send(
-		renderHtml(locals)
-	);
+	return res.status(200).send(renderHtml(locals));
 };
 
-const onRedirect = (res) => (redirectedUrl) => {
+const onRedirect = res => redirectedUrl => {
 	return res.redirect(302, redirectedUrl);
 };
 

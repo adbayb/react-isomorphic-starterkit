@@ -1,10 +1,4 @@
-const renderHtml = (
-  {
-    body,
-    scripts,
-    styles
-  } = {}
-) => `<!DOCTYPE html>
+const renderHtml = ({ body, scripts, styles } = {}) => `<!DOCTYPE html>
 <html>
 
   <head>

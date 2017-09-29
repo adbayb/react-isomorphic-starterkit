@@ -8,8 +8,8 @@ export default (
 		<Route path="/" component={Root}>
 			<IndexRoute component={() => <div>Default view</div>} />
 			{/* <IndexRoute component={Navbar} /> */}
-			<Route path="/example" component={Example}/>
+			<Route path="/example" component={Example} />
 		</Route>
 		<Route path="*" component={() => <div>Not found</div>} />
-	</Route >
+	</Route>
 );

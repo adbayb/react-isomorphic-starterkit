@@ -37,12 +37,11 @@ const decorator = (target, key, descriptor) => {
 class App extends React.Component {
 	@decorator
 	test() {
-		return new Promise((resolve) => {
+		return new Promise(resolve => {
 			setTimeout(() => {
 				resolve("Async/Await working");
 			});
 		});
-
 	}
 
 	async testAsync() {
@@ -54,20 +53,23 @@ class App extends React.Component {
 
 		return (
 			<div>
-				<Header>
-					Isomorphic React Starter Kit v3.0
-				</Header>
+				<Header>Isomorphic React Starter Kit v3.0</Header>
 
 				{this.props.children}
-				<Link to="/" style={styles.link}>Go back</Link>
+				<Link to="/" style={styles.link}>
+					Go back
+				</Link>
 
 				<Footer>
-					<p style={styles.footer}>
-						Feel free to use it and share it
-					</p>
+					<p style={styles.footer}>Feel free to use it and share it</p>
 					<p style={styles.footer}>Ayoub ADIB</p>
-					<p style={styles.footer}>Twitter: <a href="https://twitter.com/adbayb">adbayb</a></p>
-					<p style={styles.footer}>Github: <a href="https://github.com/adbayb">https://github.com/adbayb</a></p>
+					<p style={styles.footer}>
+						Twitter: <a href="https://twitter.com/adbayb">adbayb</a>
+					</p>
+					<p style={styles.footer}>
+						Github:{" "}
+						<a href="https://github.com/adbayb">https://github.com/adbayb</a>
+					</p>
 				</Footer>
 			</div>
 		);
