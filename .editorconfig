@@ -1,0 +1,15 @@
+root = true
+
+[*]
+# editorconfig to configure ide display settings (like indent size) but mainly
+# for github purposes to display tab indent with a size of
+# 4 instead of the default browser one (e.g. 8)
+# Some configurations here are redundant with the .pretierrc ones but an issue is open
+# to add .editorconfig support to prettier: https://github.com/prettier/prettier/issues/42
+end_of_line = lf
+insert_final_newline = true
+indent_style = tab
+indent_size = 4
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true

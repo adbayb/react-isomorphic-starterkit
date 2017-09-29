@@ -20,15 +20,11 @@ const commonPlugins = [
 		}
 	}),
 	new webpack.DefinePlugin(
-		Object.assign(
-			{},
-			env,
-			{
-				"process.env": {
-					NODE_ENV: JSON.stringify("production")
-				}
+		Object.assign({}, env, {
+			"process.env": {
+				NODE_ENV: JSON.stringify("production")
 			}
-		)
+		})
 	)
 ];
 
@@ -54,7 +50,7 @@ const baseClient = {
 		new AssetsPlugin({
 			path: WEBPACK_BUILD_DIR,
 			filename: "manifest.json",
-			prettyPrint: true,
+			prettyPrint: true
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "vendor"
@@ -66,7 +62,8 @@ const baseServer = {
 	name: "prod.server",
 	target: "node",
 	externals: [
-		/^[a-z\-0-9]+$/, {
+		/^[a-z\-0-9]+$/,
+		{
 			"react-dom/server": true
 		}
 	],
@@ -83,10 +80,7 @@ const baseServer = {
 		rules: getRules()
 	},
 	resolve,
-	plugins: [
-		...commonPlugins,
-		new ExtractTextPlugin("[name].css")
-	]
+	plugins: [...commonPlugins, new ExtractTextPlugin("[name].css")]
 };
 
 module.exports = [baseClient, baseServer];

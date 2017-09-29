@@ -6,10 +6,7 @@
 		"commonjs": true
 	},
 	"parser": "babel-eslint",
-	"extends": [
-		"eslint:recommended",
-		"plugin:react/recommended"
-	],
+	"extends": ["eslint:recommended", "plugin:react/recommended"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"experimentalObjectRestSpread": true,
@@ -17,22 +14,9 @@
 		},
 		"sourceType": "module"
 	},
-	"plugins": [
-		"react"
-	],
+	"plugins": ["react", "prettier"],
 	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"quotes": [
-			"error",
-			"double"
-		],
-		"semi": [
-			"error",
-			"always"
-		],
-		"no-console": 0
+		"no-console": 0,
+		"prettier/prettier": "error"
 	}
 }

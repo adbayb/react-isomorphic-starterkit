@@ -4,9 +4,7 @@ import styles from "./Header.css";
 const Header = props => {
 	return (
 		<header className={styles.header}>
-			<p className={styles.text}>
-				{props.children}
-			</p>
+			<p className={styles.text}>{props.children}</p>
 		</header>
 	);
 };
