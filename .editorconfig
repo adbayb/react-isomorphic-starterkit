@@ -1,7 +1,7 @@
 root = true
 
 [*]
-# editorconfig to configure ide display settings (like indent size) but mainly
+# editorconfig to configure ide display settings (like indent_size) but mainly
 # for github purposes to display tab indent with a size of
 # 4 instead of the default browser one (e.g. 8)
 # Some configurations here are redundant with the .pretierrc ones but an issue is open
