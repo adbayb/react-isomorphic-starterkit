@@ -30,5 +30,45 @@
 				"moduleName": "babel-runtime"
 			}
 		]
-	]
+	],
+
+	"env": {
+		"server": {
+			"presets": ["latest", "react"],
+			"plugins": [
+				// The order is important: transform-decorators-legacy always first
+				"transform-decorators-legacy",
+				"transform-class-properties",
+				"transform-object-rest-spread",
+				// HMR:
+				"react-hot-loader/babel",
+				// babel-plugin-transform-runtime (cleaner than babel-polyfill)
+				// for async/await regenerator and some other > ES2015 polyfill
+				[
+					"transform-runtime",
+					{
+						"helpers": false,
+						"polyfill": false,
+						"regenerator": true,
+						"moduleName": "babel-runtime"
+					}
+				],
+
+				[
+					"babel-plugin-webpack-alias",
+					{
+						"config": "./config/webpack/basetest.js"
+					}
+				],
+				[
+					"transform-assets",
+					{
+						"extensions": ["png"],
+						"name": "assets/[name].[hash].[ext]"
+					}
+				],
+				"css-modules-transform"
+			]
+		}
+	}
 }

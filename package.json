@@ -1,21 +1,20 @@
 {
 	"name": "react-isomorphic-starterkit",
-	"version": "3.0.0",
+	"version": "4.0.0",
 	"description":
 		"An isomorphic React boilerplate with Webpack (CSS loader, PostCSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification.",
 	"scripts": {
 		"postinstall": "npm start",
 		"start": "npm run watch",
 		"clean": "node ./bin/clean.js",
-		"server": "node ./bin/server",
-		"build:dev": "npm run clean && node ./bin/bundler/dev.js",
-		"build:prod":
-			"npm run clean && cross-env NODE_ENV=production node ./bin/bundler/prod.js",
-		"build": "npm run build:prod",
-		"deploy":
-			"npm run build:prod && cross-env NODE_ENV=production npm run server",
-		"watch": "npm run build:dev && npm run server",
-		"format": "prettier --write **/*.{js,jsx,json,css}"
+		"format": "prettier --write **/*.{js,jsx,json,css}",
+		"babel:server": "cross-env BABEL_ENV=server babel src -d dist -w",
+		"babel:launch": "node ./bin/server/test.js",
+
+		"webpack:server": "webpack --config ./config/webpack/config.server.js",
+		"webpack:browser": "webpack --config ./config/webpack/config.browser.js",
+		"webpack:dev":
+			"npm run clean && npm run webpack:browser && npm run webpack:server && node ./dist/server/app.js"
 	},
 	"repository": {
 		"type": "git",
@@ -39,13 +38,17 @@
 	"license": "MIT",
 	"devDependencies": {
 		"assets-webpack-plugin": "^3.5.1",
+		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "^8.0.1",
 		"babel-loader": "^7.1.2",
+		"babel-plugin-css-modules-transform": "^1.2.7",
+		"babel-plugin-transform-assets": "^0.2.0",
 		"babel-plugin-transform-class-properties": "^6.24.1",
 		"babel-plugin-transform-decorators-legacy": "^1.3.4",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-plugin-transform-runtime": "^6.23.0",
+		"babel-plugin-webpack-alias": "^2.1.2",
 		"babel-preset-es2015": "^6.24.1",
 		"babel-preset-latest": "^6.24.1",
 		"babel-preset-react": "^6.24.1",
@@ -70,9 +73,11 @@
 		"compression": "^1.7.1",
 		"cross-env": "^5.0.5",
 		"express": "^4.15.5",
+		"prop-types": "^15.6.0",
 		"react": "^15.4.2",
 		"react-dom": "^15.4.2",
-		"react-router": "^3.0.2",
+		"react-router": "^4.2.0",
+		"react-router-dom": "^4.2.2",
 		"webpack-dev-middleware": "^1.12.0",
 		"webpack-hot-middleware": "^2.19.1"
 	},

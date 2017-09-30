@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Example.css";
+import image from "./img/react.png";
 
 class Example extends React.Component {
 	constructor(props) {
@@ -18,7 +19,7 @@ class Example extends React.Component {
 		return (
 			<div>
 				<p className={styles.text}> Example Component: </p>
-				<img src={require("./img/react.png")} className={styles.logo} />
+				<img src={image} className={styles.logo} />
 
 				<button onClick={this.onClick.bind(this)}> Click Me </button>
 			</div>

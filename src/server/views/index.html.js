@@ -1,4 +1,4 @@
-const renderHtml = ({ body, scripts, styles } = {}) => `<!DOCTYPE html>
+export default ({ body, scripts, styles } = {}) => `<!DOCTYPE html>
 <html>
 
   <head>
@@ -11,12 +11,10 @@ const renderHtml = ({ body, scripts, styles } = {}) => `<!DOCTYPE html>
   </head>
 
   <body>
-    <div id="root">${typeof body !== "undefined" ? body : ""}</div>
+    <div id="app">${typeof body !== "undefined" ? body : ""}</div>
 
     ${typeof scripts !== "undefined" ? scripts : ""}
   </body>
 
 </html>
 `;
-
-module.exports = renderHtml;
