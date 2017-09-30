@@ -1,19 +1,34 @@
 import path from "path";
 import express from "express";
+import webpack from "webpack";
+import webpackDevMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
-import renderHtml from "./views/index.html.js";
+import renderHtml from "./views/index.html";
+import config from "../../config/webpack/config.browser";
 import App from "../shared/App";
 
 // TODO dev/prod
-// TODO hmr
 const server = express();
 
 server.use(
 	// compress({ threshold: 0 }),
 	express.static(path.resolve(__dirname, "../../dist/assets")),
 	express.static(path.resolve(__dirname, "../../public"))
+);
+
+const clientCompiler = webpack(config);
+
+server.use(
+	webpackDevMiddleware(clientCompiler, {
+		noInfo: true,
+		stats: {
+			colors: true
+		}
+	}),
+	webpackHotMiddleware(clientCompiler)
 );
 
 server.use((req, res) => {

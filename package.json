@@ -1,8 +1,7 @@
 {
 	"name": "react-isomorphic-starterkit",
 	"version": "4.0.0",
-	"description":
-		"An isomorphic React boilerplate with Webpack (CSS loader, PostCSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification.",
+	"description": "An isomorphic React boilerplate with Webpack (CSS loader, PostCSS loader, JSX/JS loader, File loader...), React Router, React Hot Loader and ESLint static code verification.",
 	"scripts": {
 		"postinstall": "npm start",
 		"start": "npm run watch",
@@ -10,11 +9,9 @@
 		"format": "prettier --write **/*.{js,jsx,json,css}",
 		"babel:server": "cross-env BABEL_ENV=server babel src -d dist -w",
 		"babel:launch": "node ./bin/server/test.js",
-
 		"webpack:server": "webpack --config ./config/webpack/config.server.js",
 		"webpack:browser": "webpack --config ./config/webpack/config.browser.js",
-		"webpack:dev":
-			"npm run clean && npm run webpack:browser && npm run webpack:server && node ./dist/server/app.js"
+		"webpack:dev": "npm run clean && npm run webpack:browser && npm run webpack:server && node ./dist/server/app.js"
 	},
 	"repository": {
 		"type": "git",
@@ -62,7 +59,7 @@
 		"postcss-cssnext": "^3.0.2",
 		"postcss-loader": "^2.0.6",
 		"prettier": "^1.7.2",
-		"react-hot-loader": "^3.0.0-beta.6",
+		"react-hot-loader": "3.0.0-beta.7",
 		"style-loader": "^0.18.2",
 		"webpack": "^3.6.0",
 		"webpack-dev-server": "^2.9.0",
