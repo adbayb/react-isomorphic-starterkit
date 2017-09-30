@@ -1,4 +1,5 @@
 import path from "path";
+import { readFile as fsReadFile } from "fs";
 import express from "express";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
@@ -6,17 +7,29 @@ import webpackHotMiddleware from "webpack-hot-middleware";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
-import renderHtml from "./views/index.html";
-import config from "../../config/webpack/config.browser";
+// @note: hmr doesn't allow using clean-webpack-plugin inside config.client
+import config from "../../config/webpack/config.client";
 import App from "../shared/App";
+
+const readFile = path =>
+	new Promise((resolve, reject) => {
+		fsReadFile(path, "utf8", (err, data) => {
+			if (err) {
+				reject(err);
+			}
+
+			resolve(data);
+		});
+	});
 
 // TODO dev/prod
 const server = express();
+const PUBLIC_DIR = path.resolve(__dirname, "../../dist/public");
 
 server.use(
 	// compress({ threshold: 0 }),
-	express.static(path.resolve(__dirname, "../../dist/assets")),
-	express.static(path.resolve(__dirname, "../../public"))
+	express.static(PUBLIC_DIR)
+	// express.static(path.resolve(__dirname, "../../public"))
 );
 
 const clientCompiler = webpack(config);
@@ -31,7 +44,7 @@ server.use(
 	webpackHotMiddleware(clientCompiler)
 );
 
-server.use((req, res) => {
+server.use(async (req, res) => {
 	const context = {};
 	const body = renderToString(
 		<StaticRouter location={req.url} context={context}>
@@ -47,14 +60,10 @@ server.use((req, res) => {
 		res.writeHead(302, {
 			Location: context.url
 		});
-		res.end();
 	} else {
 		// status code 200
-		const html = renderHtml({
-			body,
-			scripts: `<script type="text/javascript" src="app.js"></script>`
-		});
-		res.status(200).send(html);
+		const html = await readFile(path.join(PUBLIC_DIR, "./index.html"));
+		res.status(200).send(html.replace("<!--BODY-->", body));
 	}
 });
 

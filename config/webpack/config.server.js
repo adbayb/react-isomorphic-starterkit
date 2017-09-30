@@ -1,6 +1,6 @@
 const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const { baseServer, cssLoaders } = require("./base.js");
+const { baseServer, cssLoaders } = require("./config.base.js");
 
 module.exports = merge(
 	{

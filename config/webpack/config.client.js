@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const { baseClient, cssLoaders } = require("./base.js");
+const { baseClient, cssLoaders } = require("./config.base.js");
 
 module.exports = merge(
 	{
@@ -12,7 +12,7 @@ module.exports = merge(
 			app: [
 				// cf. configuration React Hot Loader 3.X:
 				// https://github.com/gaearon/react-hot-loader/issues/243#issuecomment-211957140
-				"react-hot-loader/patch",
+				// "react-hot-loader/patch",
 				"webpack-hot-middleware/client"
 			]
 		},

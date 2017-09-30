@@ -1,28 +1,42 @@
 const path = require("path");
 const merge = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const SRC_DIR = path.resolve(__dirname, "../../src");
-const DIST_DIR = path.resolve(__dirname, "../../dist");
-const CLIENT_SRC_DIR = path.join(SRC_DIR, "./client");
-const SERVER_SRC_DIR = path.join(SRC_DIR, "./server");
-const CLIENT_BUILD_DIR = path.join(DIST_DIR, "./assets");
-const SERVER_BUILD_DIR = path.join(DIST_DIR, "./server");
+// ROOT_DIR represents the absolute path relative to package.json:
+const ROOT_DIR = path.resolve(__dirname, "../../");
 
 // cf. https://webpack.js.org/ for webpack documentation:
 const base = {
+	// context represents the base directory for resolving entry points and loaders from configuration
+	// Even if context is defined, all config cannot be set via a relative path to context (like output.path that must be an absolute path).
+	// By default context uses the current directory on which config is set.
+	// But it's recommended to pass a value like the root package.json dir;
+	// This makes the configuration independent from CWD:
+	context: ROOT_DIR,
 	module: {
 		rules: [
 			{
 				test: /\.js[x]?$/,
-				include: SRC_DIR,
-				use: ["babel-loader"]
+				// We make sure that babel-loader is transforming as few files as possible:
+				// No needs to re-transform already transformed production ready modules
+				// (e.g inside node_modules):
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						// This will cache transformations to the filesystem
+						// resulting in a speed up for next transformations:
+						cacheDirectory: true
+					}
+				}
 			},
 			{
-				test: /\.(jp[e]?g|png|gif|svg|html|ico|eot|ttf|woff|woff2|otf)$/i,
+				test: /\.(jp[e]?g|png|gif|svg|ico|eot|ttf|woff|woff2|otf)$/i,
 				use: {
 					loader: "file-loader",
 					options: {
 						name: "assets/[name].[hash].[ext]"
+						// TODO emitFile for server side https://github.com/webpack-contrib/file-loader#emitfile
 					}
 				}
 			}
@@ -30,9 +44,13 @@ const base = {
 	},
 	resolve: {
 		alias: {
-			public: path.resolve(__dirname, "../../public")
+			public: path.join(ROOT_DIR, "./public")
 		},
-		modules: [SRC_DIR, path.join(SRC_DIR, "./shared"), "node_modules"],
+		modules: [
+			path.join(ROOT_DIR, "./src"),
+			path.join(ROOT_DIR, "./src/shared"), // TODO to remove when bootstrap OK
+			"node_modules"
+		],
 		extensions: [".js", ".jsx"]
 	}
 };
@@ -40,6 +58,7 @@ const base = {
 const cssLoaders = [
 	{
 		loader: "css-loader",
+		// TODO css-loader/locals for server side https://github.com/dferber90/fake-style-loader/issues/3
 		options: {
 			modules: true,
 			minimize: true,
@@ -71,12 +90,22 @@ const baseClient = merge(
 			// The key is the chunk name. The value can be a string or an array.
 			// But for merging purpose, I used to give an array as value to allow webpack-merge
 			// to easily merge value into the array (for hmr entries for example).
-			app: [CLIENT_SRC_DIR]
+			app: ["./src/client"]
 		},
 		output: {
-			path: CLIENT_BUILD_DIR,
-			publicPath: "/"
-		}
+			path: path.join(ROOT_DIR, "./dist/public")
+		},
+		plugins: [
+			new HtmlWebpackPlugin({
+				template: "./public/template.html",
+				favicon: "./public/favicon.ico",
+				minify: {
+					removeComments: false,
+					collapseWhitespace: true,
+					preserveLineBreaks: false
+				}
+			})
+		]
 	},
 	base
 );
@@ -100,13 +129,12 @@ const baseServer = merge(
 			}
 		],
 		entry: {
-			app: [SERVER_SRC_DIR]
+			app: ["./src/server"]
 		},
 		output: {
 			filename: "[name].js",
-			path: SERVER_BUILD_DIR,
-			libraryTarget: "commonjs2",
-			publicPath: CLIENT_BUILD_DIR
+			path: path.join(ROOT_DIR, "./dist/server"),
+			libraryTarget: "commonjs2"
 		}
 	},
 	base
