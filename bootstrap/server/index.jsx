@@ -8,8 +8,8 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 // @note: hmr doesn't allow using clean-webpack-plugin inside config.client
-import config from "../../config/webpack/config.client";
-import App from "../shared/App";
+import config from "webpackConfig/config.client";
+import App from "src/App";
 
 const readFile = path =>
 	new Promise((resolve, reject) => {

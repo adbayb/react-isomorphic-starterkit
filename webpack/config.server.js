@@ -1,6 +1,6 @@
 const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const { baseServer, cssLoaders } = require("./config.base.js");
+const { baseServer, baseDev, cssLoaders } = require("./config.base.js");
 
 module.exports = merge(
 	{
@@ -17,5 +17,6 @@ module.exports = merge(
 		},
 		plugins: [new ExtractTextPlugin("[name].css")]
 	},
-	baseServer
+	baseServer,
+	baseDev
 );

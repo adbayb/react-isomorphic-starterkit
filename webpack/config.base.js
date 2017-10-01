@@ -1,9 +1,12 @@
 const path = require("path");
+const webpack = require("webpack");
 const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// ROOT_DIR represents the absolute path relative to package.json:
-const ROOT_DIR = path.resolve(__dirname, "../../");
+// TODO: https://github.com/mrsteele/dotenv-webpack
+
+// __ROOT_DIR__ represents the absolute path relative to package.json:
+const __ROOT_DIR__ = path.resolve(__dirname, "../");
 
 // cf. https://webpack.js.org/ for webpack documentation:
 const base = {
@@ -12,7 +15,7 @@ const base = {
 	// By default context uses the current directory on which config is set.
 	// But it's recommended to pass a value like the root package.json dir;
 	// This makes the configuration independent from CWD:
-	context: ROOT_DIR,
+	context: __ROOT_DIR__,
 	module: {
 		rules: [
 			{
@@ -44,15 +47,43 @@ const base = {
 	},
 	resolve: {
 		alias: {
-			public: path.join(ROOT_DIR, "./public")
+			// alias for webpack config folder to avoid confusion with webpack npm module:
+			webpackConfig: path.join(__ROOT_DIR__, "./webpack")
 		},
-		modules: [
-			path.join(ROOT_DIR, "./src"),
-			path.join(ROOT_DIR, "./src/shared"), // TODO to remove when bootstrap OK
-			"node_modules"
-		],
+		modules: [__ROOT_DIR__, path.join(__ROOT_DIR__, "./src"), "node_modules"],
 		extensions: [".js", ".jsx"]
 	}
+};
+
+const baseDev = {
+	plugins: [
+		// The DefinePlugin allows to create global constants that are replaced
+		// by their values at compile time. It's like prepack but for constants in webpack ;)
+		// For example, if we define __DEV__: true, and in the App.js we have console.log(__DEV__)
+		// The bundle code of App.js will result with console.log(true):
+		new webpack.DefinePlugin({
+			// cf. explanation why DefinePlugin needs to wrap value in JSON.stringify;
+			// https://stackoverflow.com/questions/39564802/why-does-webpacks-defineplugin-require-us-to-wrap-everything-in-json-stringify
+			// https://webpack.js.org/plugins/define-plugin/#usage
+			__DEV__: JSON.stringify(true),
+			"process.env.NODE_ENV": JSON.stringify("development")
+		})
+	]
+};
+
+const baseProd = {
+	plugins: [
+		new webpack.DefinePlugin({
+			__DEV__: JSON.stringify(false),
+			"process.env.NODE_ENV": JSON.stringify("production")
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			},
+			sourceMap: true
+		})
+	]
 };
 
 const cssLoaders = [
@@ -90,12 +121,16 @@ const baseClient = merge(
 			// The key is the chunk name. The value can be a string or an array.
 			// But for merging purpose, I used to give an array as value to allow webpack-merge
 			// to easily merge value into the array (for hmr entries for example).
-			app: ["./src/client"]
+			app: ["./bootstrap/client"]
 		},
 		output: {
-			path: path.join(ROOT_DIR, "./dist/public")
+			path: path.join(__ROOT_DIR__, "./dist/public")
 		},
 		plugins: [
+			new webpack.DefinePlugin({
+				__BROWSER__: JSON.stringify(true),
+				__NODE__: JSON.stringify(false)
+			}),
 			new HtmlWebpackPlugin({
 				template: "./public/template.html",
 				favicon: "./public/favicon.ico",
@@ -129,18 +164,26 @@ const baseServer = merge(
 			}
 		],
 		entry: {
-			app: ["./src/server"]
+			app: ["./bootstrap/server"]
 		},
 		output: {
 			filename: "[name].js",
-			path: path.join(ROOT_DIR, "./dist/server"),
+			path: path.join(__ROOT_DIR__, "./dist/server"),
 			libraryTarget: "commonjs2"
-		}
+		},
+		plugins: [
+			new webpack.DefinePlugin({
+				__BROWSER__: JSON.stringify(false),
+				__NODE__: JSON.stringify(true)
+			})
+		]
 	},
 	base
 );
 
 module.exports = {
+	baseDev,
+	baseProd,
 	baseClient,
 	baseServer,
 	cssLoaders

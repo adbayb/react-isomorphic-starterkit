@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Title from "components/title/Title";
 import styles from "./About.css";
 
 class About extends Component {
@@ -13,6 +14,7 @@ class About extends Component {
 	render() {
 		return (
 			<div className={styles.about}>
+				<Title>About page</Title>
 				<img src={require("./img/react.png")} />
 				<button onClick={this.onClick}> Click Me </button>
 			</div>

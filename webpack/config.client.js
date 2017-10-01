@@ -1,7 +1,9 @@
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const { baseClient, cssLoaders } = require("./config.base.js");
+const { baseClient, baseDev, cssLoaders } = require("./config.base.js");
 
+// TODO: prod config
+// DEV config below:
 module.exports = merge(
 	{
 		devtool: "eval-source-map",
@@ -32,10 +34,10 @@ module.exports = merge(
 			]
 		},
 		plugins: [
-			// new webpack.DefinePlugin(env),
 			new webpack.HotModuleReplacementPlugin(),
 			new webpack.NoEmitOnErrorsPlugin()
 		]
 	},
-	baseClient
+	baseClient,
+	baseDev
 );

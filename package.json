@@ -8,8 +8,8 @@
 		"start": "npm run watch",
 		"clean": "rimraf ./dist",
 		"format": "prettier --write **/*.{js,jsx,json,css}",
-		"webpack:server": "webpack --config ./config/webpack/config.server.js",
-		"webpack:client": "webpack --config ./config/webpack/config.client.js",
+		"webpack:server": "webpack --config ./webpack/config.server.js",
+		"webpack:client": "webpack --config ./webpack/config.client.js",
 		"webpack:dev":
 			"npm run clean && npm run webpack:client && npm run webpack:server && node ./dist/server/app.js"
 	},

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Footer.css";
+import styles from "./Title.css";
 
 const Title = props => {
 	return <h1 className={styles.title}>{props.children}</h1>;

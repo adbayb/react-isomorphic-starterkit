@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import App from "../shared/App";
+import App from "src/App";
 
 const mount = () => {
 	render(
@@ -13,7 +13,7 @@ const mount = () => {
 };
 
 if (module.hot) {
-	module.hot.accept("../shared/App", () => {
+	module.hot.accept("src/App", () => {
 		mount();
 	});
 }
